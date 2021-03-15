@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable({
@@ -12,7 +13,7 @@ export class DbService {
    * @param path
    * @param query
    */
-  collection$(path: string, query: any) {
+  collection$(path: string, query: any): Observable<any> {
     return this.afs
       .collection(path, query)
       .snapshotChanges()
@@ -31,7 +32,7 @@ export class DbService {
    * @param path
    * @param query
    */
-  doc$(path: string) {
+  doc$(path: string): Observable<any> {
     return this.afs
       .doc(path)
       .snapshotChanges()
@@ -48,7 +49,7 @@ export class DbService {
    * @param path
    * @returns
    */
-  delete(path: string) {
+  delete(path: string): Promise<any> {
     return this.afs.doc(path).delete();
   }
   /**
