@@ -1,0 +1,15 @@
+.cdk-drag-preview {
+  background: rgba(255, 255, 255, 0.096);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+ion-list {
+  min-height: 100px;
+}

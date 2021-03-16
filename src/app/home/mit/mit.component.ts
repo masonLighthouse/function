@@ -42,7 +42,6 @@ export class MitComponent implements OnInit {
     this.currentDate.push(this.date.getUTCMonth());
     this.currentDate.push(this.date.getUTCDay());
     this.currentDate.push(this.date.getUTCFullYear());
-    console.log(this.currentDate);
     this.mitDate = `${this.dayNames[this.currentDate[1]]}, ${
       this.monthNames[this.currentDate[0]]
     } ${this.currentDate[1]}${this.determineSuffix()}, ${this.currentDate[2]}`;

@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { SharedModule } from "./shared/shared.module";
 // ionic
 import { Firebase } from "@ionic-native/firebase/ngx";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { Firebase } from "@ionic-native/firebase/ngx";
     AngularFirestoreModule,
     AngularFireAuthModule,
     SharedModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     Firebase,

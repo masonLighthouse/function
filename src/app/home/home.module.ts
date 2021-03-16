@@ -8,9 +8,16 @@ import { HomePageRoutingModule } from "./home-routing.module";
 import { MitComponent } from "./mit/mit.component";
 import { TodoComponent } from "./todo/todo.component";
 import { BackburnerComponent } from "./backburner/backburner.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    HomePageRoutingModule,
+    DragDropModule,
+  ],
   declarations: [HomePage, MitComponent, TodoComponent, BackburnerComponent],
 })
 export class HomePageModule {}

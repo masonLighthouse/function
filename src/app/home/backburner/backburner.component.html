@@ -1,8 +1,8 @@
+<!-- 
 <ion-card mode="ios" style="padding-bottom: 10px;">
   <ion-card-header>
     <ion-card-title>Todo</ion-card-title>
   </ion-card-header>
-  <!-- re-order area -->
   <ion-reorder-group disabled="false">
     <ion-list *ngFor="let task of data">
       <ion-item-sliding>
@@ -11,10 +11,12 @@
             >Delete</ion-item-option
           >
         </ion-item-options>
-        <ion-item lines="none">
-          <ion-input value={{task}}></ion-input>
-          <ion-reorder slot="start"></ion-reorder>
-        </ion-item>
+        <div cdkDrag>
+          <ion-item lines="none">
+            <ion-input value="{{task}}"></ion-input>
+            <ion-reorder slot="start"></ion-reorder>
+          </ion-item>
+        </div>
         <ion-item-options side="end">
           <ion-item-option (click)="done(task)">Done</ion-item-option>
         </ion-item-options>
@@ -22,3 +24,4 @@
     </ion-list>
   </ion-reorder-group>
 </ion-card>
+-->
