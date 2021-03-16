@@ -10,4 +10,18 @@ export class BackburnerComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+  /**
+   * Deletes a task from the task array
+   * @param task
+   */
+  delete(task: string) {
+    console.log(task);
+  }
+  /**
+   * Marks a task as done
+   * @param task
+   */
+  done(task: string) {
+    console.log(task);
+  }
 }
