@@ -12,7 +12,17 @@
         [cdkDropListConnectedTo]="[secondList]"
         (cdkDropListDropped)="drop($event)"
       >
-        <ion-item *ngFor="let task of todo" cdkDrag lines="none">
+        <ion-item
+          *ngFor="let task of todo"
+          cdkDrag
+          lines="none"
+          ion-button
+          ion-long-press
+          [interval]="500"
+          (pressed)="pressed()"
+          (longPressed)="active()"
+          (pressEnded)="released()"
+        >
           {{task}}
         </ion-item>
       </ion-list>
@@ -36,7 +46,17 @@
         [cdkDropListConnectedTo]="[firstList]"
         (cdkDropListDropped)="drop($event)"
       >
-        <ion-item *ngFor="let task of backburner" cdkDrag lines="none">
+        <ion-item
+          *ngFor="let task of backburner"
+          cdkDrag
+          lines="none"
+          ion-button
+          ion-long-press
+          [interval]="500"
+          (pressed)="pressed()"
+          (longPressed)="active()"
+          (pressEnded)="released()"
+        >
           {{task}}
         </ion-item>
       </ion-list>

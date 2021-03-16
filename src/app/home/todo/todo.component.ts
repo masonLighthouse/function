@@ -51,4 +51,18 @@ export class TodoComponent implements OnInit {
       );
     }
   }
+  /**
+   * Long Press Shit
+   */
+  pressed() {
+    console.log("press");
+  }
+
+  active() {
+    console.log("active");
+  }
+
+  released() {
+    console.log("release");
+  }
 }

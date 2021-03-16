@@ -29,9 +29,12 @@
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/firebase": "^5.31.1",
     "@ionic/angular": "^5.5.2",
+    "@types/hammerjs": "^2.0.39",
     "cordova-plugin-firebase": "^2.0.5",
     "firebase": "^8.3.0",
     "firebase-tools": "^9.6.1",
+    "hammerjs": "^2.0.8",
+    "ionic-long-press": "^2.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

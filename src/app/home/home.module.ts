@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from "./home-routing.module";
 import { MitComponent } from "./mit/mit.component";
 import { TodoComponent } from "./todo/todo.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { LongPressModule } from "ionic-long-press";
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     IonicModule,
     HomePageRoutingModule,
     DragDropModule,
+    LongPressModule,
   ],
   declarations: [HomePage, MitComponent, TodoComponent],
 })
