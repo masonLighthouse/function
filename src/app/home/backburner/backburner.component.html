@@ -1,3 +1,27 @@
-<p>
-  backburner works!
-</p>
+<ion-card mode="ios" style="padding-bottom: 10px;">
+  <ion-card-header>
+    <ion-card-title>Backburner</ion-card-title>
+  </ion-card-header>
+  <!-- re-order area -->
+  <ion-reorder-group disabled="false">
+    <ion-list *ngFor="let task of data">
+      <ion-item-sliding>
+        <ion-item-options side="start">
+          <ion-item-option (click)="favorite(item)">Favorite</ion-item-option>
+          <ion-item-option (click)="share(item)" color="danger"
+            >Share</ion-item-option
+          >
+        </ion-item-options>
+        <ion-item lines="none">
+          <ion-label>
+            {{task}}
+          </ion-label>
+          <ion-reorder slot="start"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="unread(item)">Unread</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-reorder-group>
+</ion-card>

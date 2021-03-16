@@ -1,3 +1,24 @@
-<p>
-  todo works!
-</p>
+<ion-card mode="ios" style="padding-bottom: 10px;">
+  <ion-card-header>
+    <ion-card-title>Todo</ion-card-title>
+  </ion-card-header>
+  <!-- re-order area -->
+  <ion-reorder-group disabled="false">
+    <ion-list *ngFor="let task of data">
+      <ion-item-sliding>
+        <ion-item-options side="start">
+          <ion-item-option (click)="delete(task)" color="danger"
+            >Delete</ion-item-option
+          >
+        </ion-item-options>
+        <ion-item lines="none">
+          <ion-input value={{task}}></ion-input>
+          <ion-reorder slot="start"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="done(task)">Done</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-reorder-group>
+</ion-card>

@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-backburner',
-  templateUrl: './backburner.component.html',
-  styleUrls: ['./backburner.component.scss'],
+  selector: "app-backburner",
+  templateUrl: "./backburner.component.html",
+  styleUrls: ["./backburner.component.scss"],
 })
 export class BackburnerComponent implements OnInit {
-
-  constructor() { }
+  data: Array<string> = ["Make my bed", "Take a shower", "Work on Project"];
+  constructor() {}
 
   ngOnInit() {}
-
 }

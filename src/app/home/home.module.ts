@@ -1,19 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { IonicModule } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
+import { HomePage } from "./home.page";
 
-import { HomePageRoutingModule } from './home-routing.module';
-
+import { HomePageRoutingModule } from "./home-routing.module";
+import { MitComponent } from "./mit/mit.component";
+import { TodoComponent } from "./todo/todo.component";
+import { BackburnerComponent } from "./backburner/backburner.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule
-  ],
-  declarations: [HomePage]
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  declarations: [HomePage, MitComponent, TodoComponent, BackburnerComponent],
 })
 export class HomePageModule {}
