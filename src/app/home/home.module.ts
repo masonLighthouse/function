@@ -7,7 +7,6 @@ import { HomePage } from "./home.page";
 import { HomePageRoutingModule } from "./home-routing.module";
 import { MitComponent } from "./mit/mit.component";
 import { TodoComponent } from "./todo/todo.component";
-import { BackburnerComponent } from "./backburner/backburner.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
@@ -18,6 +17,6 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     HomePageRoutingModule,
     DragDropModule,
   ],
-  declarations: [HomePage, MitComponent, TodoComponent, BackburnerComponent],
+  declarations: [HomePage, MitComponent, TodoComponent],
 })
 export class HomePageModule {}

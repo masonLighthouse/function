@@ -13,7 +13,7 @@
         (cdkDropListDropped)="drop($event)"
       >
         <ion-item *ngFor="let task of todo" cdkDrag lines="none">
-          <ion-input value="{{task}}"></ion-input>
+          {{task}}
         </ion-item>
       </ion-list>
     </ion-col>
@@ -37,7 +37,7 @@
         (cdkDropListDropped)="drop($event)"
       >
         <ion-item *ngFor="let task of backburner" cdkDrag lines="none">
-          <ion-input value="{{task}}"></ion-input>
+          {{task}}
         </ion-item>
       </ion-list>
     </ion-col>
