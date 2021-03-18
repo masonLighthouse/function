@@ -1,4 +1,7 @@
-<ion-card mode="ios" style="padding-bottom: 10px;">
+<ion-card
+  mode="ios"
+  style="padding-bottom: 10px; font-family: GT Walsheim Pro Medium;"
+>
   <ion-card-header>
     <ion-card-title>Todo</ion-card-title>
   </ion-card-header>
@@ -6,6 +9,7 @@
   <ion-row>
     <ion-col>
       <ion-list
+        class="list"
         cdkDropList
         #firstList="cdkDropList"
         [cdkDropListData]="todo"
@@ -13,6 +17,7 @@
         (cdkDropListDropped)="drop($event)"
       >
         <ion-item
+          class="item"
           *ngFor="let task of todo"
           cdkDrag
           lines="none"
@@ -22,12 +27,27 @@
           (pressed)="pressed()"
           (longPressed)="active()"
           (pressEnded)="released()"
+          style="font-family: GT Walsheim Pro;"
         >
           {{task}}
         </ion-item>
       </ion-list>
     </ion-col>
   </ion-row>
+  <ion-card-content>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button
+        (click)="todoAppend()"
+        mode="ios"
+        color="light"
+        size="small"
+        translucent="true"
+        style="margin-bottom: -5px; margin-left: 15px;"
+      >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-card-content>
 </ion-card>
 <!-- BACKBURNER -->
 <!-- BACKBURNER -->
@@ -40,6 +60,7 @@
   <ion-row>
     <ion-col>
       <ion-list
+        class="list"
         cdkDropList
         #secondList="cdkDropList"
         [cdkDropListData]="backburner"
@@ -47,6 +68,7 @@
         (cdkDropListDropped)="drop($event)"
       >
         <ion-item
+          class="item"
           *ngFor="let task of backburner"
           cdkDrag
           lines="none"
@@ -56,10 +78,25 @@
           (pressed)="pressed()"
           (longPressed)="active()"
           (pressEnded)="released()"
+          style="font-family: GT Walsheim Pro;"
         >
           {{task}}
         </ion-item>
       </ion-list>
     </ion-col>
   </ion-row>
+  <ion-card-content>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button
+        (click)="backburnerAppend()"
+        mode="ios"
+        color="light"
+        size="small"
+        translucent="true"
+        style="margin-bottom: -5px; margin-left: 15px;"
+      >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-card-content>
 </ion-card>

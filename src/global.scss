@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* Adding Fonts */
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("./assets/fonts/GTWalsheimPro-Regular.ttf");
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Bold";
+  src: url("./assets/fonts/GTWalsheimPro-Bold.ttf");
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro Medium";
+  src: url("./assets/fonts/GTWalsheimPro-Medium.ttf");
+}

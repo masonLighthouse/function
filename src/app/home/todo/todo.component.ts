@@ -65,4 +65,16 @@ export class TodoComponent implements OnInit {
   released() {
     console.log("release");
   }
+  /**
+   * Add an element to the todo list
+   */
+   todoAppend(): void {
+    this.todo.push("New element");
+  }
+  /**
+   * Add an element to the backburner list
+   */
+  backburnerAppend(): void {
+    this.backburner.push("New element");
+  }
 }
