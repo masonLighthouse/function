@@ -2,8 +2,12 @@
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-button>
-        <ion-icon name="person" style="padding-right: 6px;"></ion-icon>
-        Log Out
+        <ion-icon
+          name="person"
+          color="dark"
+          style="padding-right: 6px;"
+        ></ion-icon>
+        <ion-text color="dark">Log Out</ion-text>
       </ion-button>
     </ion-buttons>
     <ion-title>
@@ -12,22 +16,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content
-  class="ion-padding background-gradinet"
-  style="
-    --background: rgb(40, 31, 195);
-    --background: linear-gradient(
-      27deg,
-      rgba(40, 31, 195, 1) 0%,
-      rgba(103, 103, 167, 1) 48%,
-      rgba(192, 230, 237, 1) 100%
-    );
-  "
->
+<ion-content class="ion-padding background-gradient">
   <!-- adding in the date block -->
 
   <!-- Putting in the components -->
-  <div style="max-width: 40%; margin: auto;">
+  <div class="todo-container">
     <app-mit></app-mit>
     <app-todo></app-todo>
   </div>
