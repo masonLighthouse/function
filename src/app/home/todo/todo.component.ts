@@ -68,13 +68,24 @@ export class TodoComponent implements OnInit {
   /**
    * Add an element to the todo list
    */
-   todoAppend(): void {
-    this.todo.push("New element");
+  todoAppend(): void {
+    this.todo.push("");
   }
   /**
    * Add an element to the backburner list
    */
   backburnerAppend(): void {
-    this.backburner.push("New element");
+    this.backburner.push("");
+  }
+  /**
+   * Deletes an item from an array based on the string in the array
+   * @param task 
+   */
+  deleteItem(task: string): void {
+    for (let i = 0; i < this.todo.length; i++) {
+      if (this.todo[i] === task) {
+        this.todo.splice(i, 1);
+      }
+    }
   }
 }

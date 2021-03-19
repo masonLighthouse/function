@@ -18,3 +18,31 @@
   max-width: 40%;
   margin: auto;
 }
+
+@media (max-width: 1400px) {
+  .todo-container {
+    max-width: 60%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 1200px) {
+  .todo-container {
+    max-width: 70%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .todo-container {
+    max-width: 80%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .todo-container {
+    max-width: 95%;
+    margin: auto;
+  }
+}
