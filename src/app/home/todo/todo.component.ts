@@ -2,17 +2,22 @@ import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-} from "@angular/cdk/drag-drop";
-import { Component } from "@angular/core";
+} from '@angular/cdk/drag-drop';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-todo",
-  templateUrl: "./todo.component.html",
-  styleUrls: ["./todo.component.scss"],
+  selector: 'app-todo',
+  templateUrl: './todo.component.html',
+  styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent {
-  todo: Array<string> = ["Make my bed", "Take a shower", "Work on Project", "Make breakfast"];
-  backburner: Array<string> = ["Make a cake", "Get COVID test", "Wash car"];
+  todo: Array<string> = [
+    'Make my bed',
+    'Take a shower',
+    'Work on Project',
+    'Make breakfast',
+  ];
+  backburner: Array<string> = ['Make a cake', 'Get COVID test', 'Wash car'];
   constructor() {}
 
   /**
@@ -34,7 +39,7 @@ export class TodoComponent {
    * @param event
    */
   drop(event: CdkDragDrop<string[]>): void {
-    console.log("event: ", event);
+    console.log('event: ', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -51,34 +56,20 @@ export class TodoComponent {
     }
   }
   /**
-   * Long Press Shit
-   */
-  pressed(): void {
-    console.log("press");
-  }
-
-  active(): void {
-    console.log("active");
-  }
-
-  released(): void {
-    console.log("release");
-  }
-  /**
    * Add an element to the todo list
    */
   todoAppend(): void {
-    this.todo.push("");
+    this.todo.push('');
   }
   /**
    * Add an element to the backburner list
    */
   backburnerAppend(): void {
-    this.backburner.push("");
+    this.backburner.push('');
   }
   /**
    * Deletes an item from an array based on the string in the array
-   * @param task 
+   * @param task
    */
   deleteItem(task: string): void {
     for (let i = 0; i < this.todo.length; i++) {

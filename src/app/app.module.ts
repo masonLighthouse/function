@@ -19,8 +19,6 @@ import { SharedModule } from './shared/shared.module';
 // ionic
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// gestures
-import { IonicGestureConfig } from '../app/utils/IonicGestureConfig';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +36,6 @@ import { IonicGestureConfig } from '../app/utils/IonicGestureConfig';
   providers: [
     Firebase,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig },
   ],
   bootstrap: [AppComponent],
 })
