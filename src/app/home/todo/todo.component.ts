@@ -3,38 +3,37 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from "@angular/cdk/drag-drop";
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-todo",
   templateUrl: "./todo.component.html",
   styleUrls: ["./todo.component.scss"],
 })
-export class TodoComponent implements OnInit {
-  todo: Array<string> = ["Make my bed", "Take a shower", "Work on Project"];
+export class TodoComponent {
+  todo: Array<string> = ["Make my bed", "Take a shower", "Work on Project", "Make breakfast"];
   backburner: Array<string> = ["Make a cake", "Get COVID test", "Wash car"];
   constructor() {}
 
-  ngOnInit() {}
   /**
    * Deletes a task from the task array
    * @param task
    */
-  delete(task: string) {
+  delete(task: string): void {
     console.log(task);
   }
   /**
    * Marks a task as done
    * @param task
    */
-  done(task: string) {
+  done(task: string): void {
     console.log(task);
   }
   /**
    * Handle drag and drop events
    * @param event
    */
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<string[]>): void {
     console.log("event: ", event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -54,15 +53,15 @@ export class TodoComponent implements OnInit {
   /**
    * Long Press Shit
    */
-  pressed() {
+  pressed(): void {
     console.log("press");
   }
 
-  active() {
+  active(): void {
     console.log("active");
   }
 
-  released() {
+  released(): void {
     console.log("release");
   }
   /**

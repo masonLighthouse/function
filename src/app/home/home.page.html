@@ -5,16 +5,19 @@
         <ion-icon
           name="person"
           color="dark"
-          style="padding-right: 6px;"
+          style="padding-right: 6px"
         ></ion-icon>
-        <ion-text color="dark" style="font-family: GT Walsheim Pro;"
+
+        <ion-text
+          button
+          color="dark"
+          style="font-family: GT Walsheim Pro"
+          (click)="auth.signOut()"
           >Log Out</ion-text
         >
       </ion-button>
     </ion-buttons>
-    <ion-title style="font-family: GT Walsheim Pro;">
-      Function
-    </ion-title>
+    <ion-title style="font-family: GT Walsheim Pro"> Function </ion-title>
   </ion-toolbar>
 </ion-header>
 

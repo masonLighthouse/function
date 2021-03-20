@@ -1,6 +1,6 @@
 <ion-card
   mode="ios"
-  style="padding-bottom: 10px; font-family: GT Walsheim Pro Medium;"
+  style="padding-bottom: 10px; font-family: GT Walsheim Pro Medium"
 >
   <ion-card-header>
     <ion-card-title>Todo</ion-card-title>
@@ -27,20 +27,22 @@
           (pressed)="pressed()"
           (longPressed)="active()"
           (pressEnded)="released()"
-          style="font-family: GT Walsheim Pro;"
+          style="font-family: GT Walsheim Pro"
           ><ion-icon
             cdkDragHandle
             name="ellipsis-vertical-outline"
-            style="margin-left: -10px; cursor: pointer;"
+            style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
-          <ion-input value="{{task}}"></ion-input>
+          <ion-input
+            value="{{ task }}"
+            style="font-family: GT Walsheim Pro"
+          ></ion-input>
           <ion-icon
             button
             (click)="deleteItem(task)"
-            class="deleteIcon"
             name="close-outline"
             slot="end"
-            style="cursor: pointer;"
+            style="cursor: pointer"
           ></ion-icon>
         </ion-item>
       </ion-list>
@@ -54,7 +56,7 @@
         color="light"
         size="small"
         translucent="true"
-        style="margin-bottom: -8px; margin-left: 15px;"
+        style="margin-bottom: -8px; margin-left: 15px"
       >
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
@@ -64,7 +66,7 @@
 <!-- BACKBURNER -->
 <!-- BACKBURNER -->
 <!-- BACKBURNER -->
-<ion-card mode="ios" style="padding-bottom: 10px;">
+<ion-card mode="ios" style="padding-bottom: 10px">
   <ion-card-header>
     <ion-card-title>Backburner</ion-card-title>
   </ion-card-header>
@@ -90,26 +92,28 @@
           (pressed)="pressed()"
           (longPressed)="active()"
           (pressEnded)="released()"
-          style="font-family: GT Walsheim Pro;"
+          style="font-family: GT Walsheim Pro"
         >
           <ion-icon
             cdkDragHandle
             name="ellipsis-vertical-outline"
-            style="margin-left: -10px; cursor: pointer;"
+            style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
-          <ion-input value="{{task}}"></ion-input>
+          <ion-input
+            value="{{ task }}"
+            style="font-family: GT Walsheim Pro"
+          ></ion-input>
           <ion-icon
             button
             (click)="deleteItem(task)"
             name="close-outline"
             slot="end"
-            style="cursor: pointer;"
+            style="cursor: pointer"
           ></ion-icon>
         </ion-item>
       </ion-list>
-    </ion-col>
-  </ion-row>
-  <ion-card-content>
+    </ion-col> </ion-row
+  ><ion-card-content>
     <ion-fab vertical="bottom" horizontal="start" slot="fixed">
       <ion-fab-button
         (click)="backburnerAppend()"
@@ -117,7 +121,7 @@
         color="light"
         size="small"
         translucent="true"
-        style="margin-bottom: -8px; margin-left: 15px;"
+        style="margin-bottom: -8px; margin-left: 15px"
       >
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>

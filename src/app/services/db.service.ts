@@ -1,17 +1,18 @@
-import { Injectable } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class DbService {
   constructor(private afs: AngularFirestore) {}
   /**
-   * Dealing with collection observables
+   *
    * @param path
    * @param query
+   * Dealing with collection observables
    */
   collection$(path: string, query: any): Observable<any> {
     return this.afs
@@ -38,9 +39,9 @@ export class DbService {
       .snapshotChanges()
       .pipe(
         map((doc) => {
-          const data: Object = doc.payload.data();
+          const data = doc.payload.data();
           const id = doc.payload.id;
-          return { id, ...data };
+          return { id, data };
         })
       );
   }
@@ -57,16 +58,14 @@ export class DbService {
    * @param path
    * @param data
    */
-  updateAt(path: string, data: Object): Promise<any> {
-    const segments = path.split("/").filter((v) => {
-      v;
-    });
+  updateAt(path: string, data: object): Promise<any> {
+    const segments = path.split('/').filter((v) => v);
     if (segments.length % 2) {
       // we are dealing with a collection (odd)
       return this.afs.collection(path).add(data);
     } else {
       // we are dealing with a document (even)
-      return this.afs.doc(path).update(data);
+      return this.afs.doc(path).set(data);
     }
   }
 }
