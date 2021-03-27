@@ -8,7 +8,7 @@ This is an active side-project with estimated completion by May 1, 2021.
 
 - Angular 11+ (TS, RxJS, Firestore)
 - Ionic (allows for browser, and native iOS/Android application development with the same codebase)
-- Firestore (basic noSQL nested connections)
+- Firestore (basic noSQL nested collections, and batch-writes)
 
 ## Features
 
