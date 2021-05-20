@@ -21,22 +21,22 @@ export class TodoComponent {
   constructor() {}
 
   /**
-   * Deletes a task from the task array
    * @param task
+   * Deletes a task from the task array
    */
   delete(task: string): void {
     console.log(task);
   }
   /**
-   * Marks a task as done
    * @param task
+   * Marks a task as done
    */
   done(task: string): void {
     console.log(task);
   }
   /**
-   * Handle drag and drop events
    * @param event
+   * Handle drag and drop events
    */
   drop(event: CdkDragDrop<string[]>): void {
     console.log('event: ', event);
@@ -68,8 +68,8 @@ export class TodoComponent {
     this.backburner.push('');
   }
   /**
-   * Deletes an item from an array based on the string in the array
    * @param task
+   * Deletes an item from an array based on the string in the array
    */
   deleteItem(task: string): void {
     for (let i = 0; i < this.todo.length; i++) {

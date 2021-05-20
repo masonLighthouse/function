@@ -1,4 +1,4 @@
-## Information on this module
+# Information on this module
 
 This is the shared directory. It holds components that are used in more than one page
 (such as a button, or shared user settings, or a status badge for something else in
