@@ -1,5 +1,6 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { debounce } from 'debounce';
+import { MitService } from 'src/app/services/mit.service';
 
 @Component({
   selector: 'app-mit',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mit.component.scss'],
 })
 export class MitComponent implements OnInit {
-  mit: string = 'Write the MIT here';
+  mit: string;
   mitDate: string;
   date: Date = new Date();
   currentDate: Array<any> = [];
@@ -34,21 +35,21 @@ export class MitComponent implements OnInit {
     6: 'Saturday',
     7: 'Sunday',
   };
-  constructor() {}
+
+  constructor(private mitService: MitService) {}
   /**
    * Make the date format and set it right
    */
   ngOnInit() {
-    this.currentDate.push(this.date.getUTCMonth());
-    this.currentDate.push(this.date.getUTCDate());
+    this.currentDate.push(this.date.getMonth());
+    this.currentDate.push(this.date.getDate());
     this.currentDate.push(this.date.getFullYear());
-    this.mitDate = `${this.dayNames[this.currentDate[1]]}, ${
+    this.mitDate = `${this.dayNames[this.currentDate[0]]}, ${
       this.monthNames[this.currentDate[0]]
     } ${this.currentDate[1]}${this.determineSuffix()}, ${this.currentDate[2]}`;
   }
   /**
    * Determine the right suffix for the date
-   * @returns {string}
    */
   determineSuffix(): string {
     // determine the suffix based on the dictionary
@@ -62,5 +63,13 @@ export class MitComponent implements OnInit {
       default:
         return 'th';
     }
+  }
+  /**
+   *
+   * @param ev
+   * SAVE THE MIT TO THE DB
+   */
+  async saveMit(mit: string): Promise<void> {
+    debounce(await this.mitService.saveMit(mit), 200);
   }
 }

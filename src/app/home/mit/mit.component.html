@@ -3,8 +3,11 @@
     <ion-text style="font-family: GT Walsheim Pro">{{ mitDate }}</ion-text>
     <ion-card-title>
       <ion-input
+        debounced-input
+        id="mitInput"
         [(ngModel)]="mit"
         placeholder="Enter your MIT here"
+        (input)="saveMit($event.target.value)"
         style="font-family: GT Walsheim Pro Medium"
       >
       </ion-input>
