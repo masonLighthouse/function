@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { debounce } from 'debounce';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { MitService } from 'src/app/services/mit.service';
 
 @Component({
@@ -44,10 +45,13 @@ export class MitComponent implements OnInit, OnDestroy {
    * Make the date format and set it right
    */
   ngOnInit() {
-    this.mitService.getMit().subscribe((mitData: any) => {
-      this.mit = mitData[0].mitString;
-      this.mitId = mitData[0].id;
-    });
+    this.mitService
+      .getMit()
+      .pipe(take(1))
+      .subscribe((mitData: any) => {
+        this.mit = mitData[0].mitString;
+        this.mitId = mitData[0].id;
+      });
     this.currentDate.push(this.date.getMonth());
     this.currentDate.push(this.date.getDate());
     this.currentDate.push(this.date.getFullYear());
@@ -76,8 +80,9 @@ export class MitComponent implements OnInit, OnDestroy {
    * @param ev
    * SAVE THE MIT TO THE DB
    */
-  async saveMit(mit: string): Promise<void> {
-    debounce(await this.mitService.saveMit(this.mitId, mit), 200);
+  async saveMit(ev: HTMLInputElement) {
+    console.log(ev);
+    debounce(await this.mitService.saveMit(this.mitId, ev.value), 200);
   }
   /**
    * Unsub from the sub

@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DbService } from './db.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MitService {
-  constructor(
-    private afs: AngularFirestore,
-    private db: DbService
-  ) {}
-    
+  constructor(private afs: AngularFirestore, private db: DbService) {}
+
   /**
    *
    * @param mitString

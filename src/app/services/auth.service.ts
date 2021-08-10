@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { DbService } from './db.service';
 import { User } from '../models/user.model';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +18,12 @@ export class AuthService {
 
   constructor(
     private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
     private db: DbService,
     private router: Router,
     private route: ActivatedRoute,
     private platform: Platform,
-    private loadingController: LoadingController,
-    private popoverController: PopoverController
+    private loadingController: LoadingController
   ) {
     this.user$ = this.afAuth.authState;
     /**
@@ -85,11 +86,23 @@ export class AuthService {
       photoURL: user.photoURL,
     };
     this.db.updateAt(userPath, userData);
-    const mitPath = `users/${user.uid}/mit`;
-    const mitData = {
-      mitString: '',
-    };
-    this.db.updateAt(mitPath, mitData);
+    // first see if it exists
+    this.afs
+      .collection('users')
+      .doc(`${firebase.auth().currentUser.uid}`)
+      .collection('mit')
+      .get()
+      .toPromise()
+      .then((collection) => {
+        if (collection.empty) {
+          console.log('AHA');
+          const mitPath = `users/${firebase.auth().currentUser.uid}/mit`;
+          const mitData = {
+            mitString: '',
+          };
+          this.db.updateAt(mitPath, mitData);
+        }
+      });
   }
   /**
    * LOADER LOGIC
