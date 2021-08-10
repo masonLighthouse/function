@@ -19,6 +19,8 @@ import { SharedModule } from './shared/shared.module';
 // ionic
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// drag drop
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     SharedModule,
     BrowserAnimationsModule,
+    DragDropModule,
   ],
   providers: [
     Firebase,

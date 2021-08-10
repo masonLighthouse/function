@@ -3,14 +3,20 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Todo } from 'src/app/models/todo.model';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit, OnDestroy {
+  todoSub: Subscription;
+  todos: Todo[];
+  backburners: Observable<any[]>;
   todo: Array<string> = [
     'Make my bed',
     'Take a shower',
@@ -18,7 +24,13 @@ export class TodoComponent {
     'Make breakfast',
   ];
   backburner: Array<string> = ['Make a cake', 'Get COVID test', 'Wash car'];
-  constructor() {}
+  constructor(private todoService: TodoService) {}
+
+  ngOnInit(): void {
+    this.todoSub = this.todoService.getTodos().subscribe((todos) => {
+      this.todos = todos;
+    });
+  }
 
   /**
    * @param task
@@ -59,7 +71,7 @@ export class TodoComponent {
    * Add an element to the todo list
    */
   todoAppend(): void {
-    this.todo.push('');
+    this.todos.push({ id: 'HAHA', todo: '', index: 1 });
   }
   /**
    * Add an element to the backburner list
@@ -72,10 +84,16 @@ export class TodoComponent {
    * Deletes an item from an array based on the string in the array
    */
   deleteItem(task: string): void {
-    for (let i = 0; i < this.todo.length; i++) {
-      if (this.todo[i] === task) {
-        this.todo.splice(i, 1);
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i] === task) {
+        this.todos.splice(i, 1);
       }
     }
+  }
+  /**
+   * Unsub from the todos
+   */
+  ngOnDestroy(): void {
+    this.todoSub.unsubscribe();
   }
 }
