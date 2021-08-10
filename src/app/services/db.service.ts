@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -12,60 +13,57 @@ export class DbService {
    *
    * @param path
    * @param query
-   * Dealing with collection observables
    */
-  collection$(path: string, query: any): Observable<any> {
+  collection$(
+    path: string,
+    query?: QueryFn<firebase.firestore.DocumentData>
+  ): Observable<any[]> {
     return this.afs
       .collection(path, query)
       .snapshotChanges()
       .pipe(
         map((actions) => {
           return actions.map((a) => {
-            const data: Object = a.payload.doc.data();
+            const data: any = a.payload.doc.data();
             const id = a.payload.doc.id;
             return { id, ...data };
           });
         })
       );
   }
-  /**
-   * Dealing with document observables
-   * @param path
-   * @param query
-   */
+
   doc$(path: string): Observable<any> {
     return this.afs
       .doc(path)
       .snapshotChanges()
       .pipe(
         map((doc) => {
-          const data = doc.payload.data();
-          const id = doc.payload.id;
-          return { id, data };
+          return { id: doc.payload.id, data: doc.payload.data() };
         })
       );
   }
+
   /**
-   * Given a path to a collection or a document, deletes it
-   * @param path
-   * @returns
-   */
-  delete(path: string): Promise<any> {
-    return this.afs.doc(path).delete();
-  }
-  /**
-   * Given a path and a query, updates data at a collection or document
-   * @param path
-   * @param data
+   * @param  {string} path 'collection' or 'collection/docID'
+   * @param  {object} data new data
+   *
+   * Creates or updates data on a collection or document.
    */
   updateAt(path: string, data: object): Promise<any> {
     const segments = path.split('/').filter((v) => v);
     if (segments.length % 2) {
-      // we are dealing with a collection (odd)
+      // Odd is always a collection
       return this.afs.collection(path).add(data);
     } else {
-      // we are dealing with a document (even)
-      return this.afs.doc(path).set(data);
+      // Even is always document
+      return this.afs.doc(path).set(data, { merge: true });
     }
+  }
+  /**
+   * DELETE DOCUMENT FROM FIRESTORE
+   * @param  {string} path path to document
+   */
+  delete(path: string): Promise<void> {
+    return this.afs.doc(path).delete();
   }
 }

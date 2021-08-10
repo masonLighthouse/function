@@ -77,14 +77,19 @@ export class AuthService {
    * SAVE THE USER
    */
   save(user: User) {
-    const path = `users/${user.uid}`;
-    const data = {
+    const userPath = `users/${user.uid}`;
+    const userData = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
     };
-    this.db.updateAt(path, data);
+    this.db.updateAt(userPath, userData);
+    const mitPath = `users/${user.uid}/mit`;
+    const mitData = {
+      mitString: '',
+    };
+    this.db.updateAt(mitPath, mitData);
   }
   /**
    * LOADER LOGIC
