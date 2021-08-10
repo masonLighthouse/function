@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { debounce } from 'debounce';
 import { Subscription } from 'rxjs';
 import { MitService } from 'src/app/services/mit.service';
@@ -8,7 +8,7 @@ import { MitService } from 'src/app/services/mit.service';
   templateUrl: './mit.component.html',
   styleUrls: ['./mit.component.scss'],
 })
-export class MitComponent implements OnInit {
+export class MitComponent implements OnInit, OnDestroy {
   mitSub: Subscription;
   mitId: any;
   mit: string;
@@ -78,5 +78,11 @@ export class MitComponent implements OnInit {
    */
   async saveMit(mit: string): Promise<void> {
     debounce(await this.mitService.saveMit(this.mitId, mit), 200);
+  }
+  /**
+   * Unsub from the sub
+   */
+  ngOnDestroy(): void {
+    this.mitSub.unsubscribe();
   }
 }
