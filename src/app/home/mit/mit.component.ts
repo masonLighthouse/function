@@ -80,7 +80,7 @@ export class MitComponent implements OnInit, OnDestroy {
    * @param ev
    * SAVE THE MIT TO THE DB
    */
-  async saveMit(ev: HTMLInputElement) {
+  async saveMit(ev: any) {
     console.log(ev);
     debounce(await this.mitService.saveMit(this.mitId, ev.value), 200);
   }
