@@ -72,13 +72,13 @@
         class="list"
         cdkDropList
         #secondList="cdkDropList"
-        [cdkDropListData]="backburner"
+        [cdkDropListData]="backburners"
         [cdkDropListConnectedTo]="[firstList]"
         (cdkDropListDropped)="drop($event)"
       >
         <ion-item
           class="item"
-          *ngFor="let task of backburner"
+          *ngFor="let task of backburners"
           cdkDrag
           lines="none"
           ion-button
@@ -90,7 +90,10 @@
             style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
           <ion-input
-            value="{{ task }}"
+            debounce="12"
+            id="todoInput"
+            (input)="updateTodo($event.target)"
+            value="{{ task.todo }}"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
           <ion-icon

@@ -16,6 +16,15 @@ This is an active side-project with estimated completion by May 1, 2021.
 - Integrations with Google Calendar (voice-activated reminders with google now added to backburner section, removing friction)
 - Draggable elements between todo and backburner section
 
+## Premium features
+
+These features are not a part of function yet, but they are on the roadmap.
+
+- Task analytics (indluding tracking 'nomadic' tasks that go from task to task)
+- Kanban-style task maangement between todo lists
+- Tagging
+- Task suggestions
+
 ## How to run
 
 - Clone repo
@@ -27,4 +36,4 @@ This is an active side-project with estimated completion by May 1, 2021.
 - Authentication and routing works
 - Dragging elements between todo and backburner sections work
 - Currently, all todo and backburner elements are boilerplate and do not update, but this is en route
-- Total application size: ~750k 
+- Total application size: ~970k

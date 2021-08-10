@@ -16,41 +16,20 @@ import { TodoService } from 'src/app/services/todo.service';
 export class TodoComponent implements OnInit, OnDestroy {
   todoSub: Subscription;
   todos: Todo[];
-  backburners: Observable<any[]>;
-  todo: Array<string> = [
-    'Make my bed',
-    'Take a shower',
-    'Work on Project',
-    'Make breakfast',
-  ];
-  backburner: Array<string> = ['Make a cake', 'Get COVID test', 'Wash car'];
+  backburners: Todo[];
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.todoSub = this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
+      this.backburners = todos;
     });
-  }
-
-  /**
-   * @param task
-   * Deletes a task from the task array
-   */
-  delete(task: string): void {
-    console.log(task);
-  }
-  /**
-   * @param task
-   * Marks a task as done
-   */
-  done(task: string): void {
-    console.log(task);
   }
   /**
    * @param event
    * Handle drag and drop events
    */
-  drop(event: CdkDragDrop<string[]>): void {
+  drop(event: CdkDragDrop<Todo[], Todo[]>) {
     console.log('event: ', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -58,6 +37,19 @@ export class TodoComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
+      console.log(event.previousIndex, 'New index: ', event.currentIndex);
+      let newData: Todo[] = [];
+      let index: number = 0;
+      event.container.data.forEach((entry) => {
+        console.log(entry);
+        newData.push({
+          id: entry.id,
+          index: index,
+          todo: entry.todo,
+        });
+        index += 1;
+      });
+      this.todoService.sortTodos(newData);
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -71,13 +63,21 @@ export class TodoComponent implements OnInit, OnDestroy {
    * Add an element to the todo list
    */
   todoAppend(): void {
-    this.todos.push({ id: 'HAHA', todo: '', index: 1 });
+    this.todoService.createTodo();
+  }
+  /**
+   * Updates a todo
+   */
+  updateTodo(ev: any) {
+    console.log(ev);
+    console.log('Anything?');
+    // this.todoService.updateTodo();
   }
   /**
    * Add an element to the backburner list
    */
   backburnerAppend(): void {
-    this.backburner.push('');
+    this.backburners.push({ id: 'HAHA', todo: '', index: 1 });
   }
   /**
    * @param task
@@ -85,7 +85,7 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   deleteItem(task: string): void {
     for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i] === task) {
+      if (this.todos[i].todo === task) {
         this.todos.splice(i, 1);
       }
     }

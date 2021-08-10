@@ -8,7 +8,6 @@ import firebase from 'firebase/app';
 })
 export class MitService {
   constructor(private afs: AngularFirestore) {}
-
   /**
    *
    * @param mitString
