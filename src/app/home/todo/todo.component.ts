@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
 import { debounce } from 'debounce';
+import { Backburner } from 'src/app/models/backburner.model';
+import { BackburnerService } from 'src/app/services/backburner.service';
 
 @Component({
   selector: 'app-todo',
@@ -16,24 +18,35 @@ import { debounce } from 'debounce';
 })
 export class TodoComponent implements OnInit {
   todoSub: Subscription;
+  backburnersSub: Subscription;
   todos: Todo[];
-  backburners: Todo[];
-  constructor(private todoService: TodoService) {}
+  backburners: Backburner[];
+  constructor(
+    private todoService: TodoService,
+    private backburnerService: BackburnerService
+  ) {}
 
   ngOnInit(): void {
     this.todoSub = this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
-      this.backburners = todos;
     });
     setTimeout(() => {
       this.todoSub.unsubscribe();
+    }, 1000);
+    this.backburnersSub = this.backburnerService
+      .getBackburners()
+      .subscribe((backburners) => {
+        this.backburners = backburners;
+      });
+    setTimeout(() => {
+      this.backburnersSub.unsubscribe();
     }, 1000);
   }
   /**
    * @param event
    * Handle drag and drop events
    */
-  drop(event: CdkDragDrop<Todo[], Todo[]>) {
+  drop(event: CdkDragDrop<any[], any[]>) {
     console.log('event: ', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -76,10 +89,17 @@ export class TodoComponent implements OnInit {
     debounce(await this.todoService.updateTodo(ev, todo.id), 1000);
   }
   /**
+   * Updates a todo
+   */
+  async updateBackburner(ev: any, todo: Todo) {
+    debounce(await this.backburnerService.updateBackburner(ev, todo.id), 1000);
+  }
+  /**
    * Add an element to the backburner list
    */
   backburnerAppend(): void {
-    this.backburners.push({ id: 'HAHA', todo: '', index: 1 });
+    console.log('HAHA');
+    this.backburnerService.createBackburner();
   }
   /**
    * @param task

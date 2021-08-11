@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import firebase from 'firebase/app';
-import { LoadingController, Platform, PopoverController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { DbService } from './db.service';
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Todo } from '../models/todo.model';
+import { TodoService } from './todo.service';
+import { Backburner } from '../models/backburner.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +26,7 @@ export class AuthService {
     private router: Router,
     private route: ActivatedRoute,
     private platform: Platform,
-    private loadingController: LoadingController
+    private todoService: TodoService
   ) {
     this.user$ = this.afAuth.authState;
     /**
@@ -95,7 +98,6 @@ export class AuthService {
       .toPromise()
       .then((collection) => {
         if (collection.empty) {
-          console.log('AHA');
           const mitPath = `users/${firebase.auth().currentUser.uid}/mit`;
           const mitData = {
             mitString: '',
@@ -103,15 +105,44 @@ export class AuthService {
           this.db.updateAt(mitPath, mitData);
         }
       });
-  }
-  /**
-   * LOADER LOGIC
-   */
-  async presentLoader() {
-    const loading = await this.loadingController.create({
-      message: 'Logging you in',
-    });
-    await loading.present();
+    // now to set up the other two
+    this.afs
+      .collection('users')
+      .doc(`${firebase.auth().currentUser.uid}`)
+      .collection('todos')
+      .get()
+      .toPromise()
+      .then((collection) => {
+        if (collection.empty) {
+          const todoPath = `users/${firebase.auth().currentUser.uid}/todos`;
+          const todoData: Todo = {
+            id: this.todoService.randomFirebaseId(),
+            todo: '',
+            index: 99,
+          };
+          this.db.updateAt(todoPath, todoData);
+        }
+      });
+    // now to set up the other two
+    this.afs
+      .collection('users')
+      .doc(`${firebase.auth().currentUser.uid}`)
+      .collection('todos')
+      .get()
+      .toPromise()
+      .then((collection) => {
+        if (collection.empty) {
+          const backburnerPath = `users/${
+            firebase.auth().currentUser.uid
+          }/todos`;
+          const backburnerData: Backburner = {
+            id: this.todoService.randomFirebaseId(),
+            backburner: '',
+            index: 99,
+          };
+          this.db.updateAt(backburnerPath, backburnerData);
+        }
+      });
   }
   /**
    * RETURN THE USER'S UID

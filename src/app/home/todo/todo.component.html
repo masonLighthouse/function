@@ -93,8 +93,8 @@
           ></ion-icon>
           <ion-input
             id="todoInput"
-            (input)="updateTodo($event.target)"
-            value="{{ task.todo }}"
+            (input)="updateBackburner($event.target.value, task)"
+            value="{{ task.backburner }}"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
           <ion-icon
