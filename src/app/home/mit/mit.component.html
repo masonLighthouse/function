@@ -3,6 +3,7 @@
     <ion-text style="font-family: GT Walsheim Pro">{{ mitDate }}</ion-text>
     <ion-card-title>
       <ion-input
+        *ngIf="mit"
         debounced-input
         id="mitInput"
         [(ngModel)]="mit"
@@ -11,6 +12,11 @@
         style="font-family: GT Walsheim Pro Medium"
       >
       </ion-input>
+      <ion-skeleton-text
+        *ngIf="!mit"
+        animated
+        style="width: 100%; height: 30px"
+      ></ion-skeleton-text>
     </ion-card-title>
   </ion-card-header>
   <!-- 

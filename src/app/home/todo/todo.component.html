@@ -29,6 +29,8 @@
             style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
           <ion-input
+            debounced-input
+            (ionInput)="updateTodo($event.target.value, task)"
             value="{{ task.todo }}"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
@@ -90,7 +92,6 @@
             style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
           <ion-input
-            debounce="12"
             id="todoInput"
             (input)="updateTodo($event.target)"
             value="{{ task.todo }}"

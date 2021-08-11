@@ -45,23 +45,21 @@ export class TodoService {
       .add({
         id: id,
         index: 99,
-        todo: 'New todo!',
+        todo: '',
       });
   }
   /**
    *
    * @returns - promise in the form that this will make a new document
    */
-  updateTodo(todoString: string): Promise<DocumentReference<Todo>> {
-    const id = this.randomFirebaseId();
+  updateTodo(todoString: string, todoId: string): Promise<any> {
     return this.afs
       .collection('users')
       .doc(`${firebase.auth().currentUser.uid}`)
       .collection<Todo>('todos')
-      .add({
-        id: id,
-        index: 99,
-        todo: 'New todo!',
+      .doc(todoId)
+      .update({
+        todo: todoString,
       });
   }
   /**

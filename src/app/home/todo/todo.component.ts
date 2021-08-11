@@ -3,17 +3,18 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
+import { debounce } from 'debounce';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss'],
 })
-export class TodoComponent implements OnInit, OnDestroy {
+export class TodoComponent implements OnInit {
   todoSub: Subscription;
   todos: Todo[];
   backburners: Todo[];
@@ -24,6 +25,9 @@ export class TodoComponent implements OnInit, OnDestroy {
       this.todos = todos;
       this.backburners = todos;
     });
+    setTimeout(() => {
+      this.todoSub.unsubscribe();
+    }, 1000);
   }
   /**
    * @param event
@@ -68,10 +72,8 @@ export class TodoComponent implements OnInit, OnDestroy {
   /**
    * Updates a todo
    */
-  updateTodo(ev: any) {
-    console.log(ev);
-    console.log('Anything?');
-    // this.todoService.updateTodo();
+  async updateTodo(ev: any, todo: Todo) {
+    debounce(await this.todoService.updateTodo(ev, todo.id), 1000);
   }
   /**
    * Add an element to the backburner list
@@ -89,11 +91,5 @@ export class TodoComponent implements OnInit, OnDestroy {
         this.todos.splice(i, 1);
       }
     }
-  }
-  /**
-   * Unsub from the todos
-   */
-  ngOnDestroy(): void {
-    this.todoSub.unsubscribe();
   }
 }
