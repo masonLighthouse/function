@@ -25,22 +25,41 @@ export class TodoComponent implements OnInit {
     private todoService: TodoService,
     private backburnerService: BackburnerService
   ) {}
-
+  /**
+   *
+   */
   ngOnInit(): void {
     this.todoSub = this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
     });
-    setTimeout(() => {
-      this.todoSub.unsubscribe();
-    }, 1000);
     this.backburnersSub = this.backburnerService
       .getBackburners()
       .subscribe((backburners) => {
         this.backburners = backburners;
       });
-    setTimeout(() => {
-      this.backburnersSub.unsubscribe();
-    }, 1000);
+    setTimeout(() => {}, 1000);
+  }
+  /**
+   * Focusing unsubscribes
+   */
+  todoFocus(): void {
+    this.todoSub.unsubscribe();
+  }
+  backburnerFocus(): void {
+    this.backburnersSub.unsubscribe();
+  }
+  /**
+   * @param task
+   * Deletes an item from an array based on the string in the array
+   */
+  deleteItem(task: Todo): void {
+    for (let i = 0; i < this.todos.length; i++) {
+      if (this.todos[i].todo === task.todo) {
+        this.todoService.deleteTodo(task);
+        // re-init the component, which updates the list
+        this.ngOnInit();
+      }
+    }
   }
   /**
    * @param event
@@ -98,18 +117,6 @@ export class TodoComponent implements OnInit {
    * Add an element to the backburner list
    */
   backburnerAppend(): void {
-    console.log('HAHA');
     this.backburnerService.createBackburner();
-  }
-  /**
-   * @param task
-   * Deletes an item from an array based on the string in the array
-   */
-  deleteItem(task: string): void {
-    for (let i = 0; i < this.todos.length; i++) {
-      if (this.todos[i].todo === task) {
-        this.todos.splice(i, 1);
-      }
-    }
   }
 }

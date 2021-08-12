@@ -30,6 +30,7 @@
           ></ion-icon>
           <ion-input
             debounced-input
+            (ionFocus)="todoFocus()"
             (ionInput)="updateTodo($event.target.value, task)"
             value="{{ task.todo }}"
             style="font-family: GT Walsheim Pro"

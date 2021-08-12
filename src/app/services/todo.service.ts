@@ -64,6 +64,20 @@ export class TodoService {
   }
   /**
    *
+   * @param todo - A todo
+   * @returns a promise that this item is going to be deleted
+   */
+  deleteTodo(todo: Todo): Promise<void> {
+    return this.afs
+      .collection('users')
+      .doc(`${firebase.auth().currentUser.uid}`)
+      .collection<Todo>('todos')
+      .doc(todo.id)
+      .delete();
+  }
+
+  /**
+   *
    * @param todos - the array of todos
    * @returns void
    */
