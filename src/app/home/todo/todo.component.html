@@ -35,6 +35,11 @@
             style="font-family: GT Walsheim Pro"
           ></ion-input>
           <ion-icon
+            name="checkbox-outline"
+            slot="end"
+            style="cursor: pointer"
+          ></ion-icon>
+          <ion-icon
             button
             (click)="deleteTodo(task)"
             name="close-outline"
@@ -101,6 +106,11 @@
             [(ngModel)]="backburners[index].backburner"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
+          <ion-icon
+            name="checkbox-outline"
+            slot="end"
+            style="cursor: pointer"
+          ></ion-icon>
           <ion-icon
             button
             (click)="deleteBackburner(task)"
