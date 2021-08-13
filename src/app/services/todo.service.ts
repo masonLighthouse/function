@@ -11,6 +11,13 @@ import { Observable } from 'rxjs';
 export class TodoService {
   constructor(private afs: AngularFirestore) {}
   /**
+   * ORDERING THE DOCUMENTS BY TIMESTAMP
+   */
+  timestamp(): firebase.firestore.FieldValue {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    return timestamp;
+  }
+  /**
    *
    * @param workspaceId
    * GET THE FAVORITE PAGES FOR THE CURRENT WORKSPACE, ORDERED BY TITLE
@@ -47,6 +54,7 @@ export class TodoService {
         id: id,
         index: 99,
         todo: '',
+        createdTime: this.timestamp(),
       });
   }
   /**

@@ -44,6 +44,13 @@ export class AuthService {
       }
     });
   }
+  /**
+   * ORDERING THE DOCUMENTS BY TIMESTAMP
+   */
+  timestamp(): firebase.firestore.FieldValue {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    return timestamp;
+  }
   /*
    * GOOGLE SIGN IN
    */
@@ -119,6 +126,7 @@ export class AuthService {
             id: this.todoService.randomFirebaseId(),
             todo: '',
             index: 99,
+            createdTime: this.timestamp(),
           };
           this.db.updateAt(todoPath, todoData);
         }
@@ -139,6 +147,7 @@ export class AuthService {
             id: this.todoService.randomFirebaseId(),
             backburner: '',
             index: 99,
+            createdTime: this.timestamp(),
           };
           this.db.updateAt(backburnerPath, backburnerData);
         }

@@ -10,7 +10,13 @@ import { Backburner } from '../models/backburner.model';
 })
 export class BackburnerService {
   constructor(private afs: AngularFirestore) {}
-
+  /**
+   * ORDERING THE DOCUMENTS BY TIMESTAMP
+   */
+  timestamp(): firebase.firestore.FieldValue {
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    return timestamp;
+  }
   /**
    *
    * @param workspaceId
@@ -50,6 +56,7 @@ export class BackburnerService {
         id: id,
         index: 99,
         backburner: '',
+        createdTime: this.timestamp(),
       });
   }
   /**
