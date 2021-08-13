@@ -18,7 +18,7 @@
       >
         <ion-item
           class="item"
-          *ngFor="let task of todos; let index = index; trackBy: trackByIndex"
+          *ngFor="let task of todos; let index = index"
           cdkDrag
           lines="none"
           style="font-family: GT Walsheim Pro"
@@ -85,11 +85,7 @@
       >
         <ion-item
           class="item"
-          *ngFor="
-            let task of backburners;
-            let index = index;
-            trackBy: trackByIndex
-          "
+          *ngFor="let task of backburners; let index = index"
           cdkDrag
           lines="none"
           style="font-family: GT Walsheim Pro"
