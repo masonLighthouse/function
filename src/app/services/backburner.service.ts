@@ -39,13 +39,14 @@ export class BackburnerService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  createBackburner(): Promise<DocumentReference<Backburner>> {
+  createBackburner(): Promise<void> {
     const id = this.randomFirebaseId();
     return this.afs
       .collection('users')
       .doc(`${firebase.auth().currentUser.uid}`)
       .collection<Backburner>('backburners')
-      .add({
+      .doc(id)
+      .set({
         id: id,
         index: 99,
         backburner: '',
@@ -77,7 +78,7 @@ export class BackburnerService {
     return this.afs
       .collection('users')
       .doc(`${firebase.auth().currentUser.uid}`)
-      .collection<Backburner>('todos')
+      .collection<Backburner>('backburners')
       .doc(backburner.id)
       .delete();
   }

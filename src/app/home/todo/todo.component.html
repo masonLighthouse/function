@@ -18,7 +18,7 @@
       >
         <ion-item
           class="item"
-          *ngFor="let task of todos"
+          *ngFor="let task of todos; let index = index; trackBy: trackByIndex"
           cdkDrag
           lines="none"
           style="font-family: GT Walsheim Pro"
@@ -30,8 +30,8 @@
           <ion-input
             debounced-input
             (ionFocus)="todoFocus()"
-            (ionInput)="updateTodo($event.target.value, task)"
-            value="{{ task.todo }}"
+            (ngModelChange)="updateTodo($event, task)"
+            [(ngModel)]="todos[index].todo"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
           <ion-icon
@@ -80,7 +80,11 @@
       >
         <ion-item
           class="item"
-          *ngFor="let task of backburners"
+          *ngFor="
+            let task of backburners;
+            let index = index;
+            trackBy: trackByIndex
+          "
           cdkDrag
           lines="none"
           style="font-family: GT Walsheim Pro"
@@ -93,8 +97,8 @@
           <ion-input
             id="todoInput"
             (ionFocus)="backburnerFocus()"
-            (ionInput)="updateBackburner($event.target.value, task)"
-            value="{{ task.backburner }}"
+            (ngModelChange)="updateBackburner($event, task)"
+            [(ngModel)]="backburners[index].backburner"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
           <ion-icon

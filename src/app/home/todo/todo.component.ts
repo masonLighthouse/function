@@ -7,7 +7,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
-import { debounce } from 'debounce';
 import { Backburner } from 'src/app/models/backburner.model';
 import { BackburnerService } from 'src/app/services/backburner.service';
 
@@ -21,6 +20,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   backburnersSub: Subscription;
   todos: Todo[];
   backburners: Backburner[];
+  live = false;
   constructor(
     private todoService: TodoService,
     private backburnerService: BackburnerService
@@ -29,6 +29,7 @@ export class TodoComponent implements OnInit, OnDestroy {
    *
    */
   ngOnInit(): void {
+    this.live = true;
     this.todoSub = this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
     });
@@ -42,9 +43,13 @@ export class TodoComponent implements OnInit, OnDestroy {
    * Focusing unsubscribes
    */
   todoFocus(): void {
+    this.live = false;
     this.todoSub.unsubscribe();
+    this.backburnersSub.unsubscribe();
   }
   backburnerFocus(): void {
+    this.live = false;
+    this.todoSub.unsubscribe();
     this.backburnersSub.unsubscribe();
   }
   /**
@@ -55,6 +60,9 @@ export class TodoComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i].todo === task.todo) {
         this.todoService.deleteTodo(task);
+        if (this.live === false) {
+          this.ngOnInit();
+        }
       }
     }
   }
@@ -66,6 +74,9 @@ export class TodoComponent implements OnInit, OnDestroy {
     for (let i = 0; i < this.backburners.length; i++) {
       if (this.backburners[i].backburner === task.backburner) {
         this.backburnerService.deleteBackburner(task);
+        if (this.live === false) {
+          this.ngOnInit();
+        }
       }
     }
   }
@@ -116,30 +127,35 @@ export class TodoComponent implements OnInit, OnDestroy {
    * Add an element to the todo list
    */
   todoAppend(): void {
-    this.todoService.createTodo();
-    this.ngOnInit();
+    if (this.live === true) {
+      this.todoService.createTodo();
+    } else {
+      this.todoService.createTodo();
+      this.ngOnInit();
+    }
   }
   /**
    * Add an element to the backburner list
    */
   backburnerAppend(): void {
-    this.backburnerService.createBackburner();
-    this.ngOnInit();
+    if (this.live === true) {
+      this.backburnerService.createBackburner();
+    } else {
+      this.backburnerService.createBackburner();
+      this.ngOnInit();
+    }
   }
   /**
    * Updates a todo
    */
-  async updateTodo(ev: any, todo: Todo) {
-    debounce(await this.todoService.updateTodo(ev, todo.id), 1000);
+  async updateTodo(todoString: string, todo: Todo) {
+    this.todoService.updateTodo(todoString, todo.id);
   }
   /**
    * Updates a todo
    */
-  async updateBackburner(ev: any, backburner: Backburner) {
-    debounce(
-      await this.backburnerService.updateBackburner(ev, backburner.id),
-      1000
-    );
+  async updateBackburner(backburnerString: any, backburner: Backburner) {
+    this.backburnerService.updateBackburner(backburnerString, backburner.id);
   }
   /**
    * Sanity unsubscribes

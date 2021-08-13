@@ -36,13 +36,14 @@ export class TodoService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  createTodo(): Promise<DocumentReference<Todo>> {
+  createTodo(): Promise<void> {
     const id = this.randomFirebaseId();
     return this.afs
       .collection('users')
       .doc(`${firebase.auth().currentUser.uid}`)
       .collection<Todo>('todos')
-      .add({
+      .doc(id)
+      .set({
         id: id,
         index: 99,
         todo: '',

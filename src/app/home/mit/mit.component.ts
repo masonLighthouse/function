@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { debounce } from 'debounce';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { MitService } from 'src/app/services/mit.service';
@@ -80,8 +79,8 @@ export class MitComponent implements OnInit, OnDestroy {
    * @param ev
    * SAVE THE MIT TO THE DB
    */
-  async saveMit(ev: any) {
-    debounce(await this.mitService.saveMit(this.mitId, ev.value), 200);
+  saveMit(ev: any) {
+    this.mitService.saveMit(this.mitId, ev.value);
   }
   /**
    * Unsub from the sub
