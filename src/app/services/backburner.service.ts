@@ -70,6 +70,19 @@ export class BackburnerService {
   }
   /**
    *
+   * @param backburner - A backburner
+   * @returns a promise that this item is going to be deleted
+   */
+  deleteBackburner(backburner: Backburner): Promise<void> {
+    return this.afs
+      .collection('users')
+      .doc(`${firebase.auth().currentUser.uid}`)
+      .collection<Backburner>('todos')
+      .doc(backburner.id)
+      .delete();
+  }
+  /**
+   *
    * @param backburners - the array of backburners
    * @returns void
    */

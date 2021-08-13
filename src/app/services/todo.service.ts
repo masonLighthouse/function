@@ -75,7 +75,6 @@ export class TodoService {
       .doc(todo.id)
       .delete();
   }
-
   /**
    *
    * @param todos - the array of todos

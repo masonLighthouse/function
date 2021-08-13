@@ -14,14 +14,13 @@
         #firstList="cdkDropList"
         [cdkDropListData]="todos"
         [cdkDropListConnectedTo]="[secondList]"
-        (cdkDropListDropped)="drop($event)"
+        (cdkDropListDropped)="drop($event, 'todo')"
       >
         <ion-item
           class="item"
           *ngFor="let task of todos"
           cdkDrag
           lines="none"
-          ion-button
           style="font-family: GT Walsheim Pro"
           ><ion-icon
             cdkDragHandle
@@ -37,7 +36,7 @@
           ></ion-input>
           <ion-icon
             button
-            (click)="deleteItem(task)"
+            (click)="deleteTodo(task)"
             name="close-outline"
             slot="end"
             style="cursor: pointer"
@@ -77,14 +76,13 @@
         #secondList="cdkDropList"
         [cdkDropListData]="backburners"
         [cdkDropListConnectedTo]="[firstList]"
-        (cdkDropListDropped)="drop($event)"
+        (cdkDropListDropped)="drop($event, 'backburner')"
       >
         <ion-item
           class="item"
           *ngFor="let task of backburners"
           cdkDrag
           lines="none"
-          ion-button
           style="font-family: GT Walsheim Pro"
         >
           <ion-icon
@@ -94,13 +92,14 @@
           ></ion-icon>
           <ion-input
             id="todoInput"
-            (input)="updateBackburner($event.target.value, task)"
+            (ionFocus)="backburnerFocus()"
+            (ionInput)="updateBackburner($event.target.value, task)"
             value="{{ task.backburner }}"
             style="font-family: GT Walsheim Pro"
           ></ion-input>
           <ion-icon
             button
-            (click)="deleteItem(task)"
+            (click)="deleteBackburner(task)"
             name="close-outline"
             slot="end"
             style="cursor: pointer"
