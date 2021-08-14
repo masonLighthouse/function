@@ -45,7 +45,13 @@ export class BackburnerService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  createBackburner(): Promise<void> {
+  createBackburner(backburners: Backburner[]): Promise<void> {
+    let largestIndex = 0;
+    backburners.forEach((backburner) => {
+      if (backburner.index > largestIndex) {
+        largestIndex = backburner.index;
+      }
+    });
     const id = this.randomFirebaseId();
     return this.afs
       .collection('users')
@@ -54,7 +60,7 @@ export class BackburnerService {
       .doc(id)
       .set({
         id: id,
-        index: 99,
+        index: largestIndex + 1,
         backburner: '',
         createdTime: this.timestamp(),
       });

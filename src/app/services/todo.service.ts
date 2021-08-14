@@ -43,7 +43,13 @@ export class TodoService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  createTodo(): Promise<void> {
+  createTodo(todos: Todo[]): Promise<void> {
+    let largestIndex = 0;
+    todos.forEach((todo) => {
+      if (todo.index > largestIndex) {
+        largestIndex = todo.index;
+      }
+    });
     const id = this.randomFirebaseId();
     return this.afs
       .collection('users')
@@ -52,7 +58,7 @@ export class TodoService {
       .doc(id)
       .set({
         id: id,
-        index: 99,
+        index: largestIndex + 1,
         todo: '',
         createdTime: this.timestamp(),
       });

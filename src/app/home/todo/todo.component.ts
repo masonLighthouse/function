@@ -29,6 +29,12 @@ export class TodoComponent implements OnInit, OnDestroy {
    *
    */
   ngOnInit(): void {
+    this.subscribeToObservables();
+  }
+  /**
+   * Subscribe!
+   */
+  subscribeToObservables() {
     this.live = true;
     this.todoSub = this.todoService.getTodos().subscribe((todos) => {
       this.todos = todos;
@@ -61,7 +67,7 @@ export class TodoComponent implements OnInit, OnDestroy {
       if (this.todos[i].todo === task.todo) {
         this.todoService.deleteTodo(task);
         if (this.live === false) {
-          this.ngOnInit();
+          this.subscribeToObservables();
         }
       }
     }
@@ -75,7 +81,7 @@ export class TodoComponent implements OnInit, OnDestroy {
       if (this.backburners[i].backburner === task.backburner) {
         this.backburnerService.deleteBackburner(task);
         if (this.live === false) {
-          this.ngOnInit();
+          this.subscribeToObservables();
         }
       }
     }
@@ -128,10 +134,10 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   todoAppend(): void {
     if (this.live === true) {
-      this.todoService.createTodo();
+      this.todoService.createTodo(this.todos);
     } else {
-      this.todoService.createTodo();
-      this.ngOnInit();
+      this.todoService.createTodo(this.todos);
+      this.subscribeToObservables();
     }
   }
   /**
@@ -139,10 +145,10 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   backburnerAppend(): void {
     if (this.live === true) {
-      this.backburnerService.createBackburner();
+      this.backburnerService.createBackburner(this.backburners);
     } else {
-      this.backburnerService.createBackburner();
-      this.ngOnInit();
+      this.backburnerService.createBackburner(this.backburners);
+      this.subscribeToObservables();
     }
   }
   /**
@@ -157,6 +163,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   async updateBackburner(backburnerString: any, backburner: Backburner) {
     this.backburnerService.updateBackburner(backburnerString, backburner.id);
   }
+  
   /**
    * Sanity unsubscribes
    */
