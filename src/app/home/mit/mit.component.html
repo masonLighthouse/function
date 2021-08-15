@@ -1,14 +1,14 @@
 <ion-card mode="ios">
   <ion-card-header>
-    <ion-text style="font-family: GT Walsheim Pro">{{ mitDate }}</ion-text>
+    <ion-text class="inter">{{ mitDate }}</ion-text>
     <ion-card-title>
       <ion-input
+        class="inter"
         debounced-input
         id="mitInput"
         [(ngModel)]="mit"
         placeholder="Enter your MIT here"
         (input)="saveMit($event.target)"
-        style="font-family: GT Walsheim Pro Medium"
       >
       </ion-input>
     </ion-card-title>

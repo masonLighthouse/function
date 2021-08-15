@@ -1,7 +1,4 @@
-<ion-card
-  mode="ios"
-  style="padding-bottom: 10px; font-family: GT Walsheim Pro Medium"
->
+<ion-card class="inter" mode="ios">
   <ion-card-header>
     <ion-card-title>Todo</ion-card-title>
   </ion-card-header>
@@ -17,22 +14,21 @@
         (cdkDropListDropped)="drop($event, 'todo')"
       >
         <ion-item
-          class="item"
+          class="item inter"
           *ngFor="let task of todos; let index = index"
           cdkDrag
           lines="none"
-          style="font-family: GT Walsheim Pro"
           ><ion-icon
             cdkDragHandle
             name="ellipsis-vertical-outline"
             style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
           <ion-input
+            class="inter"
             debounced-input
             (ionFocus)="todoFocus()"
             (ngModelChange)="updateTodo($event, task)"
             [(ngModel)]="todos[index].todo"
-            style="font-family: GT Walsheim Pro"
           ></ion-input>
           <!-- <ion-icon
             name="checkbox-outline"
@@ -84,11 +80,10 @@
         (cdkDropListDropped)="drop($event, 'backburner')"
       >
         <ion-item
-          class="item"
+          class="item inter"
           *ngFor="let task of backburners; let index = index"
           cdkDrag
           lines="none"
-          style="font-family: GT Walsheim Pro"
         >
           <ion-icon
             cdkDragHandle
@@ -96,11 +91,11 @@
             style="margin-left: -10px; cursor: pointer"
           ></ion-icon>
           <ion-input
+            class="inter"
             id="todoInput"
             (ionFocus)="backburnerFocus()"
             (ngModelChange)="updateBackburner($event, task)"
             [(ngModel)]="backburners[index].backburner"
-            style="font-family: GT Walsheim Pro"
           ></ion-input>
           <!-- 
           <ion-icon

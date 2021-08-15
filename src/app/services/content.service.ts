@@ -76,8 +76,8 @@ export class ContentService {
    * @param todo - A todo
    * @returns a promise that this item is going to be deleted
    */
-  deleteContent(todo: any, type: string): Promise<void> {
-    const path = `users/${firebase.auth().currentUser.uid}/${type}/${todo.id}`;
+  deleteContent(task: any, type: string): Promise<void> {
+    const path = `users/${firebase.auth().currentUser.uid}/${type}/${task.id}`;
     return this.db.delete(path);
   }
   /**

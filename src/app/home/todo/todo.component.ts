@@ -64,7 +64,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   deleteTodo(task: Todo): void {
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i].todo === task.todo) {
-        this.contentService.deleteContent(task, 'todo');
+        this.contentService.deleteContent(task, 'todos');
         if (this.live === false) {
           this.subscribeToObservables();
         }
@@ -78,7 +78,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   deleteBackburner(task: Backburner): void {
     for (let i = 0; i < this.backburners.length; i++) {
       if (this.backburners[i].backburner === task.backburner) {
-        this.contentService.deleteContent(task, 'backburner');
+        this.contentService.deleteContent(task, 'backburners');
         if (this.live === false) {
           this.subscribeToObservables();
         }

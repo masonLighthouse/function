@@ -21,6 +21,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // drag drop
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     SharedModule,
     BrowserAnimationsModule,
     DragDropModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     Firebase,
