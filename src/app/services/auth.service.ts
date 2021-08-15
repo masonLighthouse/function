@@ -9,7 +9,7 @@ import { DbService } from './db.service';
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Todo } from '../models/todo.model';
-import { TodoService } from './todo.service';
+import { ContentService } from './content.service';
 import { Backburner } from '../models/backburner.model';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class AuthService {
     private router: Router,
     private route: ActivatedRoute,
     private platform: Platform,
-    private todoService: TodoService
+    private contentService: ContentService
   ) {
     this.user$ = this.afAuth.authState;
     /**
@@ -123,7 +123,7 @@ export class AuthService {
         if (collection.empty) {
           const todoPath = `users/${firebase.auth().currentUser.uid}/todos`;
           const todoData: Todo = {
-            id: this.todoService.randomFirebaseId(),
+            id: this.contentService.randomFirebaseId(),
             todo: '',
             index: 99,
             createdTime: this.timestamp(),
@@ -144,7 +144,7 @@ export class AuthService {
             firebase.auth().currentUser.uid
           }/todos`;
           const backburnerData: Backburner = {
-            id: this.todoService.randomFirebaseId(),
+            id: this.contentService.randomFirebaseId(),
             backburner: '',
             index: 99,
             createdTime: this.timestamp(),

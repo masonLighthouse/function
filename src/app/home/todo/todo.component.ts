@@ -6,8 +6,9 @@ import {
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
-import { TodoService } from 'src/app/services/todo.service';
+import { ContentService } from 'src/app/services/content.service';
 import { Backburner } from 'src/app/models/backburner.model';
+import { debounce } from 'debounce';
 
 @Component({
   selector: 'app-todo',
@@ -20,7 +21,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   todos: Todo[];
   backburners: Backburner[];
   live = false;
-  constructor(private todoService: TodoService) {}
+  constructor(private contentService: ContentService) {}
   /**
    *
    */
@@ -32,11 +33,13 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   subscribeToObservables() {
     this.live = true;
-    this.todoSub = this.todoService.getTodos('todos').subscribe((todos) => {
-      this.todos = todos;
-    });
-    this.backburnersSub = this.todoService
-      .getTodos('backburners')
+    this.todoSub = this.contentService
+      .getContent('todos')
+      .subscribe((todos) => {
+        this.todos = todos;
+      });
+    this.backburnersSub = this.contentService
+      .getContent('backburners')
       .subscribe((backburners) => {
         this.backburners = backburners;
       });
@@ -61,7 +64,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   deleteTodo(task: Todo): void {
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i].todo === task.todo) {
-        this.todoService.deleteTodo(task, 'todo');
+        this.contentService.deleteContent(task, 'todo');
         if (this.live === false) {
           this.subscribeToObservables();
         }
@@ -75,7 +78,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   deleteBackburner(task: Backburner): void {
     for (let i = 0; i < this.backburners.length; i++) {
       if (this.backburners[i].backburner === task.backburner) {
-        this.todoService.deleteTodo(task, 'backburner');
+        this.contentService.deleteContent(task, 'backburner');
         if (this.live === false) {
           this.subscribeToObservables();
         }
@@ -104,7 +107,7 @@ export class TodoComponent implements OnInit, OnDestroy {
           });
           index += 1;
         });
-        this.todoService.sort(newData, 'todos');
+        this.contentService.sort(newData, 'todos');
       } else {
         event.container.data.forEach((entry) => {
           newData.push({
@@ -114,7 +117,7 @@ export class TodoComponent implements OnInit, OnDestroy {
           });
           index += 1;
         });
-        this.todoService.sort(newData, 'backburners');
+        this.contentService.sort(newData, 'backburners');
       }
     } else {
       transferArrayItem(
@@ -130,9 +133,9 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   todoAppend(): void {
     if (this.live === true) {
-      this.todoService.createTodo(this.todos, 'todos');
+      this.contentService.createContent(this.todos, 'todos');
     } else {
-      this.todoService.createTodo(this.todos, 'backburners');
+      this.contentService.createContent(this.todos, 'backburners');
       this.subscribeToObservables();
     }
   }
@@ -141,9 +144,9 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   backburnerAppend(): void {
     if (this.live === true) {
-      this.todoService.createTodo(this.backburners, 'backburners');
+      this.contentService.createContent(this.backburners, 'backburners');
     } else {
-      this.todoService.createTodo(this.backburners, 'backburners');
+      this.contentService.createContent(this.backburners, 'backburners');
       this.subscribeToObservables();
     }
   }
@@ -151,16 +154,22 @@ export class TodoComponent implements OnInit, OnDestroy {
    * Updates a todo
    */
   async updateTodo(todoString: string, todo: Todo) {
-    this.todoService.updateTodo(todoString, todo.id, 'todos');
+    debounce(
+      await this.contentService.updateTodo(todoString, todo.id, 'todos'),
+      1000
+    );
   }
   /**
    * Updates a todo
    */
   async updateBackburner(backburnerString: any, backburner: Backburner) {
-    this.todoService.updateBackburner(
-      backburnerString,
-      backburner.id,
-      'backburners'
+    debounce(
+      await this.contentService.updateBackburner(
+        backburnerString,
+        backburner.id,
+        'backburners'
+      ),
+      1000
     );
   }
 

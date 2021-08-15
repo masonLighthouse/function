@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Todo } from '../models/todo.model';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { DbService } from './db.service';
-import { Backburner } from '../models/backburner.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService {
+export class ContentService {
   constructor(private db: DbService) {}
   /**
    * ORDERING THE DOCUMENTS BY TIMESTAMP
@@ -23,7 +21,7 @@ export class TodoService {
    * GET THE FAVORITE PAGES FOR THE CURRENT WORKSPACE, ORDERED BY TITLE
    *
    */
-  getTodos(type: string): Observable<any[]> {
+  getContent(type: string): Observable<any[]> {
     const path = `users/${firebase.auth().currentUser.uid}/${type}`;
     const query = (ref) => ref.orderBy('index', 'asc');
     return this.db.collection$(path, query);
@@ -32,7 +30,7 @@ export class TodoService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  createTodo(items: any[], type: string): Promise<void> {
+  createContent(items: any[], type: string): Promise<void> {
     const path = `users/${firebase.auth().currentUser.uid}/${type}`;
     const id = this.randomFirebaseId();
     let largestIndex = 0;
@@ -78,7 +76,7 @@ export class TodoService {
    * @param todo - A todo
    * @returns a promise that this item is going to be deleted
    */
-  deleteTodo(todo: any, type: string): Promise<void> {
+  deleteContent(todo: any, type: string): Promise<void> {
     const path = `users/${firebase.auth().currentUser.uid}/${type}/${todo.id}`;
     return this.db.delete(path);
   }
