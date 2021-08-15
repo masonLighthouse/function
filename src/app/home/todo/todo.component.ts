@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
 import { Backburner } from 'src/app/models/backburner.model';
-import { BackburnerService } from 'src/app/services/backburner.service';
 
 @Component({
   selector: 'app-todo',
@@ -21,10 +20,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   todos: Todo[];
   backburners: Backburner[];
   live = false;
-  constructor(
-    private todoService: TodoService,
-    private backburnerService: BackburnerService
-  ) {}
+  constructor(private todoService: TodoService) {}
   /**
    *
    */
@@ -36,11 +32,11 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   subscribeToObservables() {
     this.live = true;
-    this.todoSub = this.todoService.getTodos().subscribe((todos) => {
+    this.todoSub = this.todoService.getTodos('todos').subscribe((todos) => {
       this.todos = todos;
     });
-    this.backburnersSub = this.backburnerService
-      .getBackburners()
+    this.backburnersSub = this.todoService
+      .getTodos('backburners')
       .subscribe((backburners) => {
         this.backburners = backburners;
       });
@@ -65,7 +61,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   deleteTodo(task: Todo): void {
     for (let i = 0; i < this.todos.length; i++) {
       if (this.todos[i].todo === task.todo) {
-        this.todoService.deleteTodo(task);
+        this.todoService.deleteTodo(task, 'todo');
         if (this.live === false) {
           this.subscribeToObservables();
         }
@@ -79,7 +75,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   deleteBackburner(task: Backburner): void {
     for (let i = 0; i < this.backburners.length; i++) {
       if (this.backburners[i].backburner === task.backburner) {
-        this.backburnerService.deleteBackburner(task);
+        this.todoService.deleteTodo(task, 'backburner');
         if (this.live === false) {
           this.subscribeToObservables();
         }
@@ -108,7 +104,7 @@ export class TodoComponent implements OnInit, OnDestroy {
           });
           index += 1;
         });
-        this.todoService.sortTodos(newData);
+        this.todoService.sort(newData, 'todos');
       } else {
         event.container.data.forEach((entry) => {
           newData.push({
@@ -118,7 +114,7 @@ export class TodoComponent implements OnInit, OnDestroy {
           });
           index += 1;
         });
-        this.backburnerService.sortBackburners(newData);
+        this.todoService.sort(newData, 'backburners');
       }
     } else {
       transferArrayItem(
@@ -134,9 +130,9 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   todoAppend(): void {
     if (this.live === true) {
-      this.todoService.createTodo(this.todos);
+      this.todoService.createTodo(this.todos, 'todos');
     } else {
-      this.todoService.createTodo(this.todos);
+      this.todoService.createTodo(this.todos, 'backburners');
       this.subscribeToObservables();
     }
   }
@@ -145,9 +141,9 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   backburnerAppend(): void {
     if (this.live === true) {
-      this.backburnerService.createBackburner(this.backburners);
+      this.todoService.createTodo(this.backburners, 'backburners');
     } else {
-      this.backburnerService.createBackburner(this.backburners);
+      this.todoService.createTodo(this.backburners, 'backburners');
       this.subscribeToObservables();
     }
   }
@@ -155,15 +151,19 @@ export class TodoComponent implements OnInit, OnDestroy {
    * Updates a todo
    */
   async updateTodo(todoString: string, todo: Todo) {
-    this.todoService.updateTodo(todoString, todo.id);
+    this.todoService.updateTodo(todoString, todo.id, 'todos');
   }
   /**
    * Updates a todo
    */
   async updateBackburner(backburnerString: any, backburner: Backburner) {
-    this.backburnerService.updateBackburner(backburnerString, backburner.id);
+    this.todoService.updateBackburner(
+      backburnerString,
+      backburner.id,
+      'backburners'
+    );
   }
-  
+
   /**
    * Sanity unsubscribes
    */

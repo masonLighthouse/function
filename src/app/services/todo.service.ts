@@ -3,6 +3,7 @@ import { Todo } from '../models/todo.model';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { DbService } from './db.service';
+import { Backburner } from '../models/backburner.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,8 @@ export class TodoService {
    * GET THE FAVORITE PAGES FOR THE CURRENT WORKSPACE, ORDERED BY TITLE
    *
    */
-  getTodos(): Observable<Todo[]> {
-    const path = `users/${firebase.auth().currentUser.uid}/todos`;
+  getTodos(type: string): Observable<any[]> {
+    const path = `users/${firebase.auth().currentUser.uid}/${type}`;
     const query = (ref) => ref.orderBy('index', 'asc');
     return this.db.collection$(path, query);
   }
@@ -31,19 +32,19 @@ export class TodoService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  createTodo(todos: Todo[]): Promise<void> {
-    const path = `users/${firebase.auth().currentUser.uid}/todos`;
+  createTodo(items: any[], type: string): Promise<void> {
+    const path = `users/${firebase.auth().currentUser.uid}/${type}`;
     const id = this.randomFirebaseId();
     let largestIndex = 0;
-    todos.forEach((todo) => {
-      if (todo.index > largestIndex) {
-        largestIndex = todo.index;
+    items.forEach((item) => {
+      if (item.index > largestIndex) {
+        largestIndex = item.index;
       }
     });
     const data = {
       id: id,
       index: largestIndex + 1,
-      todo: '',
+      type: '',
       createdTime: this.timestamp(),
     };
     return this.db.updateAt(path, data, id);
@@ -52,31 +53,47 @@ export class TodoService {
    *
    * @returns - promise in the form that this will make a new document
    */
-  updateTodo(todoString: string, todoId: string): Promise<any> {
-    const path = `users/${firebase.auth().currentUser.uid}/todos`;
-    return this.db.updateAt(path, { todo: todoString }, todoId);
+  updateTodo(
+    updateString: string,
+    typeId: string,
+    colType: string
+  ): Promise<any> {
+    const path = `users/${firebase.auth().currentUser.uid}/${colType}`;
+    return this.db.updateAt(path, { todo: updateString }, typeId);
+  }
+  /**
+   *
+   * @returns - promise in the form that this will make a new document
+   */
+  updateBackburner(
+    updateString: string,
+    typeId: string,
+    colType: string
+  ): Promise<any> {
+    const path = `users/${firebase.auth().currentUser.uid}/${colType}`;
+    return this.db.updateAt(path, { backburner: updateString }, typeId);
   }
   /**
    *
    * @param todo - A todo
    * @returns a promise that this item is going to be deleted
    */
-  deleteTodo(todo: Todo): Promise<void> {
-    const path = `users/${firebase.auth().currentUser.uid}/todos/${todo.id}`;
+  deleteTodo(todo: any, type: string): Promise<void> {
+    const path = `users/${firebase.auth().currentUser.uid}/${type}/${todo.id}`;
     return this.db.delete(path);
   }
   /**
    *
-   * @param todos - the array of todos
+   * @param items - the array of either the items or backburners
    * @returns void
    */
-  sortTodos(todos: Todo[]): void {
+  sort(items: any[], type: string): void {
     const db = firebase.firestore();
     const batch = db.batch();
-    const refs = todos.map((todo) =>
+    const refs = items.map((item) =>
       db
-        .collection(`users/${firebase.auth().currentUser.uid}/todos`)
-        .doc(todo.id)
+        .collection(`users/${firebase.auth().currentUser.uid}/${type}`)
+        .doc(item.id)
     );
     refs.forEach((ref, index) => batch.update(ref, { index: index }));
     batch.commit();
