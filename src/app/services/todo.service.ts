@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/todo.model';
 import firebase from 'firebase/app';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { DbService } from './db.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(private db: DbService) {}
   /**
    * ORDERING THE DOCUMENTS BY TIMESTAMP
    */
@@ -24,58 +23,38 @@ export class TodoService {
    *
    */
   getTodos(): Observable<Todo[]> {
-    return this.afs
-      .collection('users')
-      .doc(`${firebase.auth().currentUser.uid}`)
-      .collection<Todo>('todos', (ref) => ref.orderBy('index', 'asc'))
-      .snapshotChanges()
-      .pipe(
-        map((actions) => {
-          return actions.map((a) => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return { ...data, id };
-          });
-        })
-      );
+    const path = `users/${firebase.auth().currentUser.uid}/todos`;
+    const query = (ref) => ref.orderBy('index', 'asc');
+    return this.db.collection$(path, query);
   }
   /**
    *
    * @returns - promise in the form that this will make a new document
    */
   createTodo(todos: Todo[]): Promise<void> {
+    const path = `users/${firebase.auth().currentUser.uid}/todos`;
+    const id = this.randomFirebaseId();
     let largestIndex = 0;
     todos.forEach((todo) => {
       if (todo.index > largestIndex) {
         largestIndex = todo.index;
       }
     });
-    const id = this.randomFirebaseId();
-    return this.afs
-      .collection('users')
-      .doc(`${firebase.auth().currentUser.uid}`)
-      .collection<Todo>('todos')
-      .doc(id)
-      .set({
-        id: id,
-        index: largestIndex + 1,
-        todo: '',
-        createdTime: this.timestamp(),
-      });
+    const data = {
+      id: id,
+      index: largestIndex + 1,
+      todo: '',
+      createdTime: this.timestamp(),
+    };
+    return this.db.updateAt(path, data, id);
   }
   /**
    *
    * @returns - promise in the form that this will make a new document
    */
   updateTodo(todoString: string, todoId: string): Promise<any> {
-    return this.afs
-      .collection('users')
-      .doc(`${firebase.auth().currentUser.uid}`)
-      .collection<Todo>('todos')
-      .doc(todoId)
-      .update({
-        todo: todoString,
-      });
+    const path = `users/${firebase.auth().currentUser.uid}/todos`;
+    return this.db.updateAt(path, { todo: todoString }, todoId);
   }
   /**
    *
@@ -83,12 +62,8 @@ export class TodoService {
    * @returns a promise that this item is going to be deleted
    */
   deleteTodo(todo: Todo): Promise<void> {
-    return this.afs
-      .collection('users')
-      .doc(`${firebase.auth().currentUser.uid}`)
-      .collection<Todo>('todos')
-      .doc(todo.id)
-      .delete();
+    const path = `users/${firebase.auth().currentUser.uid}/todos/${todo.id}`;
+    return this.db.delete(path);
   }
   /**
    *

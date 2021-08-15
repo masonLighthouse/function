@@ -47,18 +47,22 @@ export class DbService {
    * @param  {string} path 'collection' or 'collection/docID'
    * @param  {object} data new data
    *
-   * Creates or updates data on a collection or document.
+   * Creates or updates data on a collection or document. Done so that it uses the ID that is made automatically.
    */
-  updateAt(path: string, data: object): Promise<any> {
+  updateAt(path: string, data: object, id?: string): Promise<any> {
     const segments = path.split('/').filter((v) => v);
     if (segments.length % 2) {
       // Odd is always a collection
-      return this.afs.collection(path).add(data);
+      id
+        ? this.afs.collection(path).doc(id).set(data, { merge: true })
+        : this.afs.collection(path).add(data);
+      return;
     } else {
       // Even is always document
       return this.afs.doc(path).set(data, { merge: true });
     }
   }
+
   /**
    * DELETE DOCUMENT FROM FIRESTORE
    * @param  {string} path path to document
