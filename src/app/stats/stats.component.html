@@ -1,6 +1,8 @@
-<ion-card mode="ios">
+<ion-card mode="ios" *ngIf="this.showChartElement">
   <ion-card-header>
-    <ion-card-title>Stats for nerds </ion-card-title>
+    <ion-card-title>Stats for nerds (placeholder)</ion-card-title>
   </ion-card-header>
-  <ion-card-content> This is the content</ion-card-content>
+  <ion-card-content>
+    <canvas class="inter" id="myChart" width="400" height="400"></canvas>
+  </ion-card-content>
 </ion-card>

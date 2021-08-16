@@ -7,5 +7,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  statsToggle: boolean = false;
   constructor(public auth: AuthService) {}
+  ngOnInit(): void {}
 }

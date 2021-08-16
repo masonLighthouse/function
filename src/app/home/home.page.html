@@ -1,5 +1,12 @@
 <ion-header mode="ios">
   <ion-toolbar>
+    <ion-item lines="none" slot="end">
+      <ion-label class="inter">Stats for nerds</ion-label>
+      <ion-toggle
+        [checked]="statsToggle"
+        [(ngModel)]="statsToggle"
+      ></ion-toggle>
+    </ion-item>
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon
@@ -22,6 +29,6 @@
   <div class="todo-container">
     <app-mit></app-mit>
     <app-todo></app-todo>
-    <app-stats></app-stats>
+    <app-stats [stats]="statsToggle"></app-stats>
   </div>
 </ion-content>
