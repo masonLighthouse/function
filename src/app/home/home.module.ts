@@ -9,6 +9,7 @@ import { MitComponent } from './mit/mit.component';
 import { TodoComponent } from './todo/todo.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LongPressModule } from 'ionic-long-press';
+import { StatsComponent } from '../stats/stats.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { LongPressModule } from 'ionic-long-press';
     DragDropModule,
     LongPressModule,
   ],
-  declarations: [HomePage, MitComponent, TodoComponent],
+  declarations: [HomePage, MitComponent, TodoComponent, StatsComponent],
 })
 export class HomePageModule {}
