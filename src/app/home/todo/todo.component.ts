@@ -136,8 +136,10 @@ export class TodoComponent implements OnInit, OnDestroy {
     if (this.live === true) {
       this.contentService.createContent(this.todos, 'todos');
     } else {
-      this.contentService.createContent(this.todos, 'backburners');
       this.subscribeToObservables();
+      setTimeout(() => {
+        this.contentService.createContent(this.todos, 'todos');
+      }, 100);
     }
   }
   /**
@@ -147,8 +149,10 @@ export class TodoComponent implements OnInit, OnDestroy {
     if (this.live === true) {
       this.contentService.createContent(this.backburners, 'backburners');
     } else {
-      this.contentService.createContent(this.backburners, 'backburners');
       this.subscribeToObservables();
+      setTimeout(() => {
+        this.contentService.createContent(this.backburners, 'backburners');
+      }, 100);
     }
   }
   /**
