@@ -39,7 +39,7 @@ export class StatsComponent implements OnInit, OnChanges {
   ctx: any;
   dataCount: number = 6;
   labels: any[] = [];
-  dataPoints: number[] = [0, 20, 20, 60, 60, 120];
+  dataPoints: number[] = [0, 3, 2, 5, 8, 7];
   data: any;
   config: any;
 
@@ -89,25 +89,12 @@ export class StatsComponent implements OnInit, OnChanges {
           labels: this.labels,
           datasets: [
             {
-              label: 'Cubic interpolation (monotone)',
+              label: 'Tasks (count of tasks crossed off on a specific day)',
               data: this.dataPoints,
               borderColor: 'rgba(255, 99, 132, 0.2)',
               fill: false,
               cubicInterpolationMode: 'monotone',
               tension: 0.4,
-            },
-            {
-              label: 'Cubic interpolation',
-              data: this.dataPoints,
-              borderColor: 'rgba(54, 162, 235, 0.2)',
-              fill: false,
-              tension: 0.4,
-            },
-            {
-              label: 'Linear interpolation (default)',
-              data: this.dataPoints,
-              borderColor: 'rgba(255, 206, 86, 0.2)',
-              fill: false,
             },
           ],
         };
@@ -138,8 +125,8 @@ export class StatsComponent implements OnInit, OnChanges {
                   display: true,
                   text: 'Value',
                 },
-                suggestedMin: -10,
-                suggestedMax: 200,
+                suggestedMin: 0,
+                suggestedMax: Math.max(...this.dataPoints) + 5,
               },
             },
           },

@@ -23,7 +23,8 @@ export class ContentService {
    */
   getContent(type: string): Observable<any[]> {
     const path = `users/${firebase.auth().currentUser.uid}/${type}`;
-    const query = (ref) => ref.orderBy('index', 'asc');
+    const query = (ref: { orderBy: (arg0: string, arg1: string) => any }) =>
+      ref.orderBy('index', 'asc');
     return this.db.collection$(path, query);
   }
   /**

@@ -9,7 +9,7 @@ import { MitComponent } from './mit/mit.component';
 import { TodoComponent } from './todo/todo.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { LongPressModule } from 'ionic-long-press';
-import { StatsComponent } from '../stats/stats.component';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   imports: [
