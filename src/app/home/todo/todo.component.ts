@@ -120,6 +120,7 @@ export class TodoComponent implements OnInit, OnDestroy {
         this.contentService.sort(newData, 'backburners');
       }
     } else {
+      console.log('This is when we transfer inside of the other arrays');
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

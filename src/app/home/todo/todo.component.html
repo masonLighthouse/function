@@ -1,4 +1,4 @@
-<ion-card class="inter" mode="ios">
+<ion-card class="inter" mode="ios" style="padding-bottom: 10px">
   <ion-card-header>
     <ion-card-title>Todo</ion-card-title>
   </ion-card-header>
@@ -20,11 +20,11 @@
           lines="none"
           ><ion-icon
             cdkDragHandle
-            name="ellipsis-vertical-outline"
-            style="margin-left: -10px; cursor: pointer"
+            name="reorder-four-outline"
+            style="margin-left: 0px; margin-right: 5px; cursor: pointer"
           ></ion-icon>
           <ion-input
-            class="inter"
+            class="inter todo-input"
             debounced-input
             (ionFocus)="todoFocus()"
             (ngModelChange)="updateTodo($event, task)"
@@ -36,6 +36,7 @@
             style="cursor: pointer"
           ></ion-icon> -->
           <ion-icon
+            class="delete-button"
             button
             (click)="deleteTodo(task)"
             name="close-outline"
@@ -54,7 +55,7 @@
         color="light"
         size="small"
         translucent="true"
-        style="margin-bottom: -8px; margin-left: 15px"
+        style="margin-bottom: -5px; margin-top: 5px; margin-left: 15px"
       >
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
@@ -87,11 +88,11 @@
         >
           <ion-icon
             cdkDragHandle
-            name="ellipsis-vertical-outline"
-            style="margin-left: -10px; cursor: pointer"
+            name="reorder-four-outline"
+            style="margin-left: 0px; margin-right: 5px; cursor: pointer"
           ></ion-icon>
           <ion-input
-            class="inter"
+            class="inter todo-input"
             id="todoInput"
             (ionFocus)="backburnerFocus()"
             (ngModelChange)="updateBackburner($event, task)"
@@ -105,6 +106,7 @@
           ></ion-icon>
           -->
           <ion-icon
+            class="delete-button"
             button
             (click)="deleteBackburner(task)"
             name="close-outline"
@@ -122,7 +124,7 @@
         color="light"
         size="small"
         translucent="true"
-        style="margin-bottom: -8px; margin-left: 15px"
+        style="margin-bottom: -5px; margin-top: 5px; margin-left: 15px"
       >
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>

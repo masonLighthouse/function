@@ -41,3 +41,29 @@ ion-list {
 .lineThrough {
   text-decoration: line-through;
 }
+
+/* Classes that handle the hover state */
+.delete-button {
+  display: none;
+}
+
+.delete-button:hover {
+  display: block;
+  cursor: pointer;
+}
+
+.todo-input:hover ~ .delete-button {
+  display: block;
+  cursor: pointer;
+  animation: fade .5s linear;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
