@@ -3,4 +3,5 @@ export interface Backburner {
   backburner: string;
   index: number;
   createdTime: any;
+  done: boolean;
 }

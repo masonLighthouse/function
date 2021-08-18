@@ -3,4 +3,5 @@ export interface Todo {
   todo: string;
   index: number;
   createdTime: any;
+  done: boolean;
 }

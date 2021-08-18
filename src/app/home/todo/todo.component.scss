@@ -50,20 +50,37 @@ ion-list {
 .delete-button:hover {
   display: block;
   cursor: pointer;
+  animation: fade 0.25s linear;
+}
+
+.check-box {
+  display: none;
+}
+
+.check-box:hover {
+  display: block;
+  cursor: pointer;
+  animation: fade 0.25s linear;
 }
 
 .todo-input:hover ~ .delete-button {
   display: block;
   cursor: pointer;
-  animation: fade .5s linear;
+  animation: fade 0.25s linear;
+}
+
+.todo-input:hover ~ .check-box {
+  display: block;
+  cursor: pointer;
+  animation: fade 0.25s linear;
 }
 
 @keyframes fade {
   0%,
-  100% {
+  50% {
     opacity: 0;
   }
-  50% {
+  100% {
     opacity: 1;
   }
 }

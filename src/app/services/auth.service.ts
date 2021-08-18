@@ -127,6 +127,7 @@ export class AuthService {
             todo: '',
             index: 99,
             createdTime: this.timestamp(),
+            done: false,
           };
           this.db.updateAt(todoPath, todoData);
         }
@@ -148,6 +149,7 @@ export class AuthService {
             backburner: '',
             index: 99,
             createdTime: this.timestamp(),
+            done: false,
           };
           this.db.updateAt(backburnerPath, backburnerData);
         }

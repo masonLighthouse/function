@@ -5,12 +5,12 @@
   <!-- re-order area -->
   <ion-row>
     <ion-col>
+      <!-- This was in the list below: [cdkDropListConnectedTo]="[secondList]" -->
       <ion-list
         class="list"
         cdkDropList
         #firstList="cdkDropList"
         [cdkDropListData]="todos"
-        [cdkDropListConnectedTo]="[secondList]"
         (cdkDropListDropped)="drop($event, 'todo')"
       >
         <ion-item
@@ -72,12 +72,12 @@
   <!-- re-order area -->
   <ion-row>
     <ion-col>
+      <!-- This was in the list below [cdkDropListConnectedTo]="[firstList]" -->
       <ion-list
         class="list"
         cdkDropList
         #secondList="cdkDropList"
         [cdkDropListData]="backburners"
-        [cdkDropListConnectedTo]="[firstList]"
         (cdkDropListDropped)="drop($event, 'backburner')"
       >
         <ion-item
@@ -105,6 +105,13 @@
             style="cursor: pointer"
           ></ion-icon>
           -->
+          <ion-icon
+            class="check-box"
+            button
+            name="checkbox-outline"
+            slot="end"
+            style="cursor: pointer"
+          ></ion-icon>
           <ion-icon
             class="delete-button"
             button
