@@ -124,7 +124,7 @@ export class AuthService {
           const todoPath = `users/${firebase.auth().currentUser.uid}/todos`;
           const todoData: Todo = {
             id: this.contentService.randomFirebaseId(),
-            todo: '',
+            todo: 'put todos here!',
             index: 99,
             createdTime: this.timestamp(),
             done: false,
@@ -136,17 +136,17 @@ export class AuthService {
     this.afs
       .collection('users')
       .doc(`${firebase.auth().currentUser.uid}`)
-      .collection('todos')
+      .collection('backburners')
       .get()
       .toPromise()
       .then((collection) => {
         if (collection.empty) {
           const backburnerPath = `users/${
             firebase.auth().currentUser.uid
-          }/todos`;
+          }/backburners`;
           const backburnerData: Backburner = {
             id: this.contentService.randomFirebaseId(),
-            backburner: '',
+            backburner: 'and, put backburners here',
             index: 99,
             createdTime: this.timestamp(),
             done: false,
