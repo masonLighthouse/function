@@ -64,6 +64,21 @@ export class ContentService {
    *
    * @returns - promise in the form that this will make a new document
    */
+  updateTodoStrikethrough(
+    strikethrough: boolean,
+    todoId: string,
+    typeId: string,
+    colType: string
+  ): Promise<any> {
+    const path = `users/${
+      firebase.auth().currentUser.uid
+    }/${colType}/${todoId}`;
+    return this.db.updateAt(path, { done: strikethrough }, typeId);
+  }
+  /**
+   *
+   * @returns - promise in the form that this will make a new document
+   */
   updateBackburner(
     updateString: string,
     typeId: string,
@@ -71,6 +86,21 @@ export class ContentService {
   ): Promise<any> {
     const path = `users/${firebase.auth().currentUser.uid}/${colType}`;
     return this.db.updateAt(path, { backburner: updateString }, typeId);
+  }
+  /**
+   *
+   * @returns - promise in the form that this will make a new document
+   */
+  updateBackburnerStrikethrough(
+    strikethrough: boolean,
+    backburnerId: string,
+    typeId: string,
+    colType: string
+  ): Promise<any> {
+    const path = `users/${
+      firebase.auth().currentUser.uid
+    }/${colType}/${backburnerId}`;
+    return this.db.updateAt(path, { done: strikethrough }, typeId);
   }
   /**
    *

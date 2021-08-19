@@ -29,15 +29,16 @@
             (ionFocus)="todoFocus()"
             (ngModelChange)="updateTodo($event, task)"
             [(ngModel)]="todos[index].todo"
+            [ngClass]="{ checked: todos[index].done === true }"
           ></ion-input>
-          <!-- <ion-icon
-            name="checkbox-outline"
-            slot="end"
-            style="cursor: pointer"
-          ></ion-icon> -->
+          <!-- BUTTONS ON THE RIGHT -->
+          <!-- BUTTONS ON THE RIGHT -->
+          <!-- BUTTONS ON THE RIGHT -->
+          <!-- BUTTONS ON THE RIGHT -->
           <ion-icon
             class="check-box"
             button
+            (click)="onTodoCheck(todos[index])"
             name="checkbox-outline"
             slot="end"
             style="cursor: pointer"
@@ -104,17 +105,16 @@
             (ionFocus)="backburnerFocus()"
             (ngModelChange)="updateBackburner($event, task)"
             [(ngModel)]="backburners[index].backburner"
+            [ngClass]="{ checked: backburners[index].done === true }"
           ></ion-input>
-          <!-- 
-          <ion-icon
-            name="checkbox-outline"
-            slot="end"
-            style="cursor: pointer"
-          ></ion-icon>
-          -->
+          <!-- BUTTONS ON THE RIGHT -->
+          <!-- BUTTONS ON THE RIGHT -->
+          <!-- BUTTONS ON THE RIGHT -->
+          <!-- BUTTONS ON THE RIGHT -->
           <ion-icon
             class="check-box"
             button
+            (click)="onBackburnerCheck(backburners[index])"
             name="checkbox-outline"
             slot="end"
             style="cursor: pointer"

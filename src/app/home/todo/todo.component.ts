@@ -177,6 +177,46 @@ export class TodoComponent implements OnInit, OnDestroy {
       1000
     );
   }
+  /**
+   *
+   * @param todo - the todo in the array
+   */
+  onTodoCheck(clickedTodo: Todo) {
+    // change it based on the ID
+    this.todos.forEach((todo, index) => {
+      if (todo.id === clickedTodo.id) {
+        this.todos[index].done === true
+          ? (this.todos[index].done = false)
+          : (this.todos[index].done = true);
+        this.contentService.updateTodoStrikethrough(
+          this.todos[index].done,
+          this.todos[index].id,
+          'todo',
+          'todos'
+        );
+      }
+    });
+  }
+  /**
+   *
+   * @param clickedBackburner - the todo in the array
+   */
+  onBackburnerCheck(clickedBackburner: Backburner) {
+    // change it based on the ID
+    this.backburners.forEach((backburner, index) => {
+      if (backburner.id === clickedBackburner.id) {
+        this.backburners[index].done === true
+          ? (this.backburners[index].done = false)
+          : (this.backburners[index].done = true);
+        this.contentService.updateBackburnerStrikethrough(
+          this.backburners[index].done,
+          this.backburners[index].id,
+          'backburner',
+          'backburners'
+        );
+      }
+    });
+  }
 
   /**
    * Sanity unsubscribes

@@ -44,17 +44,22 @@ ion-list {
 
 /* Classes that handle the hover state */
 .delete-button {
-  display: none;
+  display: inline;
+  margin-left: -5px;
 }
+
+.checked {
+  text-decoration: line-through;
+  /* for some reason ionic likes highlighting the input when checked, this stops it*/
+  user-select: none !important;
+}
+
+/*
 
 .delete-button:hover {
   display: inline;
   cursor: pointer;
   animation: fade 0.25s linear;
-}
-
-.check-box {
-  display: none;
 }
 
 .check-box:hover {
@@ -73,6 +78,12 @@ ion-list {
   display: block;
   cursor: pointer;
   animation: fade 0.25s linear;
+}
+
+*/
+
+.check-box {
+  display: inline;
 }
 
 @keyframes fade {
