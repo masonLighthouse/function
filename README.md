@@ -34,6 +34,6 @@ These features are not a part of function yet, but they are on the roadmap.
 ## Current status
 
 - Authentication and routing works
-- Dragging elements between todo and backburner sections work
-- Currently, all todo and backburner elements are boilerplate and do not update, but this is en route
+- Dragging elements within todo and backburner sections work
+- Marking a task as done, chaning the name of the task, and deleting tasks all work (wired up to the backend).
 - Total application size: ~970k
