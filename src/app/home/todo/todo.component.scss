@@ -50,7 +50,7 @@ ion-list {
 
 .checked {
   text-decoration: line-through;
-  /* for some reason ionic likes highlighting the input when checked, this stops it*/
+  /* for some reason ionic likes highlighting the input when checked, this stops it */
   user-select: none !important;
 }
 
