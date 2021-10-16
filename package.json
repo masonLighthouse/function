@@ -27,7 +27,7 @@
     "@angular/router": "~12.1.4",
     "@angular/service-worker": "~12.1.4",
     "@capacitor/core": "2.4.6",
-    "@ionic-native/core": "^5.31.1",
+    "@ionic-native/core": "^5.36.0",
     "@ionic-native/firebase": "^5.31.1",
     "@ionic-native/google-plus": "^5.31.1",
     "@ionic/angular": "^5.6.13",
