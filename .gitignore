@@ -29,3 +29,8 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+# custom shit
+/.firebase
+/robots.txt
+*.rules
