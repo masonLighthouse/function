@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
-import firebase from 'firebase/app';
 import { Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { DbService } from './db.service';
 import { User } from '../models/user.model';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Todo } from '../models/todo.model';
 import { ContentService } from './content.service';
 import { Backburner } from '../models/backburner.model';
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root',
