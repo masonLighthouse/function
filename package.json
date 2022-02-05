@@ -27,7 +27,7 @@
     "@angular/platform-browser-dynamic": "~13.2.1",
     "@angular/router": "~12.1.4",
     "@angular/service-worker": "~12.2.10",
-    "@capacitor/core": "2.4.6",
+    "@capacitor/core": "3.4.0",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/firebase": "^5.36.0",
     "@ionic-native/google-plus": "^5.31.1",
