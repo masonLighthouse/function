@@ -24,29 +24,28 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    DragDropModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the app is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-  ],
-  providers: [
-    Firebase,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        DragDropModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the app is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+    ],
+    providers: [
+        Firebase,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
