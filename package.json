@@ -19,7 +19,7 @@
     "@angular/animations": "~13.2.2",
     "@angular/cdk": "^13.2.1",
     "@angular/common": "~13.2.2",
-    "@angular/core": "~13.2.1",
+    "@angular/core": "~13.2.2",
     "@angular/fire": "^7.2.1",
     "@angular/forms": "~13.2.2",
     "@angular/material": "^13.2.3",
