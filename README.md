@@ -6,17 +6,17 @@ This is an active side-project with estimated completion by May 1, 2021.
 
 ## Stack
 
-- Angular 11+ (TS, RxJS, Firestore)
+- Angular 13+ (TS, RxJS, Firestore)
 - Ionic (allows for browser, and native iOS/Android application development with the same codebase)
 - Firestore (basic noSQL nested collections, and batch-writes)
 
-## Features
+## Features (some planned)
 
 - MIT todo system
 - Integrations with Google Calendar (voice-activated reminders with google now added to backburner section, removing friction)
 - Draggable elements between todo and backburner section
 
-## Premium features
+## Premium features (planned)
 
 These features are not a part of function yet, but they are on the roadmap.
 
