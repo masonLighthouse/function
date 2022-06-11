@@ -8,7 +8,8 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/"
     open-pull-requests-limit: 10
-    reviewers:
-      - "mseckykoebel"
     schedule:
       interval: "daily"
+    tags:
+      - "dependencies"
+      - "automerge"

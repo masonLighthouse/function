@@ -1,4 +1,4 @@
-name: Marion build
+name: Build
 
 on:
   push:
