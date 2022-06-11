@@ -2,7 +2,7 @@
 
 Function is a todo application based on the MIT productivity system (most important thing, todo, backburner).
 
-This is an active side-project with estimated completion by May 1, 2021.
+This is an (semi-inactive) side-project.
 
 ## Stack
 
