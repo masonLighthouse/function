@@ -2,7 +2,7 @@
 
 Function is a todo application based on the MIT productivity system (most important thing, todo, backburner).
 
-This is an active side-project with estimated completion by May 1, 2021.
+This is an (semi-inactive) side-project.
 
 ## Stack
 
@@ -36,4 +36,4 @@ These features are not a part of function yet, but they are on the roadmap.
 - Authentication and routing works
 - Dragging elements within todo and backburner sections work
 - Marking a task as done, chaning the name of the task, and deleting tasks all work (wired up to the backend).
-- Total application size: ~970k
+- Total application size: ~970k (😢)
