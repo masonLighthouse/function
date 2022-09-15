@@ -31,7 +31,7 @@
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/firebase": "^5.36.0",
     "@ionic-native/google-plus": "^5.36.0",
-    "@ionic/angular": "^6.2.6",
+    "@ionic/angular": "^6.2.7",
     "@types/hammerjs": "^2.0.41",
     "chart.js": "^3.7.1",
     "cordova-plugin-firebase": "^2.0.5",
