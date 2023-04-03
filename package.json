@@ -37,7 +37,7 @@
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-googleplus": "^8.5.2",
     "debounce": "^1.2.1",
-    "firebase": "^9.19.0",
+    "firebase": "^9.19.1",
     "hammerjs": "^2.0.8",
     "ionic": "^4.1.2",
     "ionic-long-press": "^2.0.3",
