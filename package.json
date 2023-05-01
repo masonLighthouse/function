@@ -33,7 +33,7 @@
     "@ionic-native/google-plus": "^5.36.0",
     "@ionic/angular": "^7.0.4",
     "@types/hammerjs": "^2.0.41",
-    "chart.js": "^4.2.1",
+    "chart.js": "^4.3.0",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-googleplus": "^8.5.2",
     "debounce": "^1.2.1",
