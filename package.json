@@ -55,7 +55,7 @@
     "@capacitor/cli": "^6.2.0",
     "@ionic/angular-toolkit": "^12.1.1",
     "@types/debounce": "^1.2.4",
-    "@types/jasmine": "~5.1.4",
+    "@types/jasmine": "~5.1.5",
     "@types/jasminewd2": "~2.0.13",
     "@types/node": "^22.10.0",
     "codelyzer": "^6.0.2",
